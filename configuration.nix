@@ -48,7 +48,7 @@
   programs.bash = {
 	  enableCompletion = true;
 	  # initeractiveShellInit = "";
-	  promptInit = "source /etc/nixos/dotfiles/liquidprompt/liquidprompt";
+	  # promptInit = "source /etc/nixos/dotfiles/liquidprompt/liquidprompt";
 	  # shellAliases = { };
   };
 
@@ -102,7 +102,7 @@
 		  extensionPackages = [ pkgs.mopidy-spotify ];
       configuration = "";
 		  extraConfigFiles = 
-			[ "./dotfiles/mopidymopidy.conf" ];
+			[ "./dotfiles/mopidy/mopidy.conf" ];
 	  };
 	  nixosManual.showManual = true;
 	  xserver = {
@@ -131,6 +131,17 @@
 		  # xkbOptions = "";
 		  # xkbVariant = "":
 	  };
+    rsyslogd = {
+      enable = true;
+      extraConfig = ''
+	$ModLoad imuxsock
+	$ModLoad imjournal
+	$ModLoad imklog
+	$KLogPermitNonKernelFacility on
+	*.* /var/log/kyle.log
+	*.* @127.0.0.1:4000
+      '';
+    };
   };
 
   # virtualisation.docker.enable = true;
