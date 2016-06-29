@@ -8,9 +8,6 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ./containers/grafana.nix
-      ./containers/graphite.nix
-      ./containers/collectd.nix
     ];
 
   boot.loader.gummiboot.enable = true;
@@ -82,6 +79,7 @@
     # Haskell
     stack
     cabal2nix
+    cabal-install
 
     # X11
     haskellPackages.xmobar
@@ -131,17 +129,7 @@
 		  # xkbOptions = "";
 		  # xkbVariant = "":
 	  };
-    rsyslogd = {
-      enable = true;
-      extraConfig = ''
-	$ModLoad imuxsock
-	$ModLoad imjournal
-	$ModLoad imklog
-	$KLogPermitNonKernelFacility on
-	*.* /var/log/kyle.log
-	*.* @127.0.0.1:4000
-      '';
-    };
+    
   };
 
   # virtualisation.docker.enable = true;
