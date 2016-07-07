@@ -10,16 +10,23 @@
       ./hardware-configuration.nix
     ];
 
-  boot.loader.gummiboot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.grub.device = "/dev/sda";
-  boot.initrd.luks.devices = [
-	  {
-		  name = "root";
-		  device = "/dev/sda2";
-		  preLVM = true;
-	  }
-  ];
+  boot = {
+    loader = {
+      gummiboot.enable = true;
+      efi.canTouchEfiVariables = true;
+    };
+    initrd.luks.devices = [
+      {
+        name = "root";
+        device = "/dev/sda2";
+        preLVM = true;
+      }
+    ];
+    extraModprobeConfig = ''
+      options snd_mia index=0
+      options snd_hda_intel index=1
+    '';
+  };
 
   hardware = {
  	  cpu.intel.updateMicrocode = true;
@@ -80,6 +87,10 @@
     stack
     cabal2nix
     cabal-install
+
+    # Rust
+    rustc
+    cargo
 
     # X11
     haskellPackages.xmobar
