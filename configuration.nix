@@ -12,7 +12,7 @@
 
   boot = {
     loader = {
-      gummiboot.enable = true;
+      systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
     initrd.luks.devices = [
@@ -20,6 +20,7 @@
         name = "root";
         device = "/dev/sda2";
         preLVM = true;
+        allowDiscards = true;
       }
     ];
     extraModprobeConfig = ''
@@ -32,27 +33,22 @@
  	  cpu.intel.updateMicrocode = true;
 	  bumblebee.enable = true;
 	  # For a later date
-	  # pulseaudio = {
-    # 	enable = true;
-	  # 	configFile = "path";
-	  #   support32Bit = true;
-	  # };
+	  pulseaudio = {
+    	enable = true;
+	  	# configFile = /etc/nixos/dotfiles/pulse/default.pa;
+	    # support32Bit = true;
+      # package = pkgs.pulseaudioFull;
+	  };
   };
 
   networking = {
     hostName = "braavos";
     networkmanager.enable = true;
-    nat = {
-     enable = true;
-     internalInterfaces = ["ve-+"];
-     externalInterface = "enp9s0";
-    };
   };
 
   programs.bash = {
 	  enableCompletion = true;
-	  # initeractiveShellInit = "";
-	  # promptInit = "source /etc/nixos/dotfiles/liquidprompt/liquidprompt";
+	  # promptInit = "";
 	  # shellAliases = { };
   };
 
@@ -60,18 +56,14 @@
 
   security.sudo.extraConfig = "";
 
-  # Select internationalisation properties.
   i18n = {
     consoleFont = "sun12x22";
     consoleKeyMap = "us";
     defaultLocale = "en_US.UTF-8";
   };
 
-  # Set your time zone.
   time.timeZone = "America/New_York";
 
-  # List packages installed in system profile. To search by name, run:
-  # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
     # Console Programs
     wget
@@ -109,11 +101,8 @@
 	  mopidy = {
 		  enable = true;
 		  extensionPackages = [ pkgs.mopidy-spotify ];
-      configuration = "";
-		  extraConfigFiles = 
-			[ "./dotfiles/mopidy/mopidy.conf" ];
+      configuration = builtins.readFile "/etc/nixos/dotfiles/mopidy/mopidy.conf";
 	  };
-	  nixosManual.showManual = true;
 	  xserver = {
 	  	enable = true;
 		  desktopManager = {
@@ -140,7 +129,7 @@
 		  # xkbOptions = "";
 		  # xkbVariant = "":
 	  };
-    
+
   };
 
   # virtualisation.docker.enable = true;
@@ -151,13 +140,12 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.extraUsers.kyle = {
 	  isNormalUser = true;
-	  home = "/home/kyle";
 	  initialPassword = "password";
- 	  description  = "Kyle McKean's unprivileged user";
+ 	  description  = "Kyle McKean";
 	  extraGroups  =  [
 		  "wheel"
 	  ];
   };
   # The NixOS release to be compatible with for stateful data such as databases.
-  system.stateVersion = "16.03";
+  system.stateVersion = "16.09";
 }

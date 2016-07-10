@@ -13,28 +13,33 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/d3583000-d2a5-47ec-9d5b-098e695651ff";
+    { device = "/dev/disk/by-uuid/fd4d14b9-3c2b-4024-be54-7dcc0d117223";
       fsType = "btrfs";
+      options = [ "noatime" "nodiratime" "discard" ];
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/87F1-9531";
+    { device = "/dev/disk/by-uuid/2D0B-D6FD";
       fsType = "vfat";
+      options = [ "noatime" "nodiratime" "discard" ];
     };
 
   fileSystems."/nix" =
-    { device = "/dev/disk/by-uuid/dbe0b945-2b2c-45ca-b03f-a882c728d437";
+    { device = "/dev/disk/by-uuid/19c233db-92f8-421e-8b02-fe9f543b81c5";
       fsType = "btrfs";
+      options = [ "noatime" "nodiratime" "discard" ];
     };
 
   fileSystems."/var" =
-    { device = "/dev/disk/by-uuid/1181b6c1-c1b2-4620-8ee9-da5b9d312b6f";
+    { device = "/dev/disk/by-uuid/dfb2962d-d337-459b-9673-a738a32abc5b";
       fsType = "btrfs";
+      options = [ "noatime" "nodiratime" "discard" ];
     };
 
   fileSystems."/home" =
-    { device = "/dev/disk/by-uuid/c97610af-65c6-45c9-823c-d3142332a4a9";
+    { device = "/dev/disk/by-uuid/681672f4-cfd3-48c9-bc8e-50dc46fa1522";
       fsType = "btrfs";
+      options = [ "noatime" "nodiratime" "discard" ];
     };
 
   swapDevices = [ ];
