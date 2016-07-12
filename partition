@@ -1,6 +1,11 @@
-#!/bin/sh +e
+#!/run/current-system/sw/bin/bash +e
 
 DISK="$1"
+
+sudo echo "Ensuring user is root, warning here be dragons turn back now with C-c unless you are sure you want to partition the disk and risk losing data."
+echo "You have ten seconds to user interupt"
+
+sleep 10
 
 parted $DISK mklabel gpt
 parted -s $DISK mkpart primary fat16 1MiB 513MiB
