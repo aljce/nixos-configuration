@@ -13,31 +13,31 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/fd4d14b9-3c2b-4024-be54-7dcc0d117223";
+    { device = "/dev/disk/by-uuid/aa1a4e00-82f3-45c1-a5ce-8468bc3ce571";
       fsType = "btrfs";
       options = [ "noatime" "nodiratime" "discard" ];
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/2D0B-D6FD";
+    { device = "/dev/disk/by-uuid/CA8C-6657";
       fsType = "vfat";
       options = [ "noatime" "nodiratime" "discard" ];
     };
 
   fileSystems."/nix" =
-    { device = "/dev/disk/by-uuid/19c233db-92f8-421e-8b02-fe9f543b81c5";
+    { device = "/dev/disk/by-uuid/b38376b0-8690-4940-a904-9cdba6f80941";
       fsType = "btrfs";
       options = [ "noatime" "nodiratime" "discard" ];
     };
 
   fileSystems."/var" =
-    { device = "/dev/disk/by-uuid/dfb2962d-d337-459b-9673-a738a32abc5b";
+    { device = "/dev/disk/by-uuid/f9323fc8-2e5e-4ab8-a5ad-508d2912de91";
       fsType = "btrfs";
       options = [ "noatime" "nodiratime" "discard" ];
     };
 
   fileSystems."/home" =
-    { device = "/dev/disk/by-uuid/681672f4-cfd3-48c9-bc8e-50dc46fa1522";
+    { device = "/dev/disk/by-uuid/35e25482-4ea9-4d9c-b481-4180737fc76a";
       fsType = "btrfs";
       options = [ "noatime" "nodiratime" "discard" ];
     };
