@@ -15,14 +15,14 @@
       name = "root";
       device = "/dev/sda2";
       preLVM = true;
-      allowDiscards = true;      
+      allowDiscards = true;
     }];
     extraModprobeConfig = ''
       options snd_mia index=0
       options snd_hda_intel index=1
     '';
   };
-  
+
   hardware = {
     cpu.intel.updateMicrocode = true;
   };
@@ -31,13 +31,9 @@
     enableCompletion = true;
   };
 
-  networking.hostName = "braavos";
-  networking.networkmanager.enable = true;
-
-  i18n = {
-    consoleFont = "sun12x22";
-    consoleKeyMap = "us";
-    defaultLocale = "en_US.UTF-8";
+  networking = {
+    hostName = "braavos";
+    networkmanager.enable = true;
   };
 
   time.timeZone = "America/New_York";
@@ -45,16 +41,25 @@
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
+    which
     wget
     git
+    git-hub
     tmux
     tree
     vim
     emacs
     w3m
-    which
     openssl
+    rtorrent
+    parted
+
+    # Fun
     ncmpcpp
+    cmatrix
+
+    # Development
+    hunspell
 
     # Haskell
     stack
@@ -64,7 +69,25 @@
     cargo
   ];
 
+  fonts = {
+    enableFontDir = true;
+    enableGhostscriptFonts = true;
+    fonts = with pkgs; [
+      tewi-font
+      inconsolata
+      source-code-pro
+    ];
+  };
+
   services = {
+    kmscon = {
+      enable = true;
+      extraConfig = ''
+        font-name=SourceCodePro
+        font-size=24
+      '';
+      hwRender = true;
+    };
     mopidy = {
       enable = true;
       extensionPackages = [ pkgs.mopidy-spotify ];
@@ -74,7 +97,7 @@
 
   users.users.kyle = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ];
+    extraGroups = [ "wheel" "power" ];
     initialPassword = "password";
   };
 
