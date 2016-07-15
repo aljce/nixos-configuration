@@ -23,12 +23,11 @@
     '';
   };
 
-  hardware = {
-    cpu.intel.updateMicrocode = true;
-  };
+  hardware.cpu.intel.updateMicrocode = true;
 
-  programs.bash = {
-    enableCompletion = true;
+  programs = {
+    bash.enableCompletion = true;
+    light.enable = true;
   };
 
   networking = {
@@ -41,6 +40,7 @@
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
+    # Basic Command line interfaces
     which
     wget
     git
@@ -50,16 +50,25 @@
     vim
     emacs
     w3m
-    openssl
     rtorrent
     parted
+
+    # Encryption
+    openssl
+    gnupg
+    pass
+
+    # Scripting
+    python
 
     # Fun
     ncmpcpp
     cmatrix
 
-    # Development
-    hunspell
+    # Emacs
+    html2text
+    offlineimap
+    mu
 
     # Haskell
     stack
@@ -67,6 +76,12 @@
     # Rust
     rustc
     cargo
+
+    # X11
+    haskellPackages.xmobar
+    rxvt_unicode
+    firefox
+    xclip
   ];
 
   fonts = {
@@ -79,14 +94,31 @@
     ];
   };
 
+  i18n.consoleFont = "sun12x22";
+
   services = {
-    kmscon = {
+    xserver = {
       enable = true;
-      extraConfig = ''
-        font-name=SourceCodePro
-        font-size=24
-      '';
-      hwRender = true;
+      layout = "us";
+      desktopManager = {
+        default = "none";
+        xterm.enable = false;
+      };
+      displayManager.slim = {
+        enable = true;
+        defaultUser = "kyle";
+      };
+      windowManager = {
+        xmonad = {
+          enable = true;
+          enableContribAndExtras = true;
+        };
+        default = "xmonad";
+      };
+      synaptics = {
+        enable = true;
+        twoFingerScroll = true;
+      };
     };
     mopidy = {
       enable = true;
