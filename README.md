@@ -20,4 +20,14 @@ sda             8:0    0 238.5G  0 disk
 ```
 
 # Install
-This is very complicated I will make a bash script installer soon
+*WARNING* The following steps create an entire operating system this goes without saying but backup your data on the device you choose.
+```sh
+# Boot into nixos iso image
+# Configure networking
+nix-env --install git vim
+git clone https://github.com/mckeankylej/nixos-configuration.git
+nixos-configuration/partition /dev/sdX
+cp -r nixos-configuration/* /mnt/etc/nixos
+# Make personal changes to /mnt/etc/nixos/configuration.nix and other modules
+nixos-install
+```
