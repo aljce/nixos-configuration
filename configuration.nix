@@ -52,6 +52,7 @@
     w3m
     rtorrent
     parted
+    taskwarrior
 
     # Encryption
     openssl
@@ -69,6 +70,9 @@
     html2text
     offlineimap
     mu
+    ledger
+    hunspell
+    # (hunspellWithDicts [hunspellDicts.en-us])
 
     # Haskell
     stack
@@ -82,6 +86,7 @@
     rxvt_unicode
     firefox
     xclip
+    screenfetch
   ];
 
   fonts = {
@@ -104,9 +109,9 @@
         default = "none";
         xterm.enable = false;
       };
-      displayManager.slim = {
+      displayManager.lightdm = {
         enable = true;
-        defaultUser = "kyle";
+        background = "/usr/share/wallpaper";
       };
       windowManager = {
         xmonad = {
@@ -129,10 +134,9 @@
 
   users.users.kyle = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "power" ];
+    extraGroups = [ "wheel" ];
     initialPassword = "password";
   };
 
   system.stateVersion = "16.09";
-
 }
