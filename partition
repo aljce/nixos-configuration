@@ -1,10 +1,9 @@
-#!/run/current-system/sw/bin/bash +e
+#!/usr/bin/env bash
+set -e
 
 DISK="$1"
 
-sudo echo "Ensuring user is root, warning here be dragons turn back now with C-c unless you are sure you want to partition the disk and risk losing data."
-echo "You have ten seconds to user interupt"
-
+echo "This will wipe the drive $/dev/sda irrevocably, you have ten seconds to C-c"
 sleep 10
 
 parted $DISK mklabel gpt
