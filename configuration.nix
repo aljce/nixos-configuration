@@ -1,10 +1,12 @@
 { config, pkgs, ... }:
-
+let graphical = true;
+in
 {
   imports =
     [
       ./hardware-configuration.nix
-    ];
+    ] ++
+    (if graphical then [./xserver.nix] else []);
 
   boot = {
     loader = {
@@ -44,7 +46,7 @@
     which
     wget
     git
-    git-hub
+    gitAndTools.hub
     tmux
     tree
     vim
@@ -53,6 +55,7 @@
     rtorrent
     parted
     taskwarrior
+    ag
 
     # Encryption
     openssl
@@ -76,17 +79,11 @@
 
     # Haskell
     stack
+    cabal2nix
 
     # Rust
     rustc
     cargo
-
-    # X11
-    haskellPackages.xmobar
-    rxvt_unicode
-    firefox
-    xclip
-    screenfetch
   ];
 
   fonts = {
@@ -102,30 +99,7 @@
   i18n.consoleFont = "sun12x22";
 
   services = {
-    xserver = {
-      enable = true;
-      layout = "us";
-      desktopManager = {
-        default = "none";
-        xterm.enable = false;
-      };
-      displayManager.lightdm = {
-        enable = true;
-        background = "/usr/share/wallpaper";
-      };
-      windowManager = {
-        xmonad = {
-          enable = true;
-          enableContribAndExtras = true;
-        };
-        default = "xmonad";
-      };
-      synaptics = {
-        enable = true;
-        twoFingerScroll = true;
-      };
-    };
-    mopidy = {
+   mopidy = {
       enable = true;
       extensionPackages = [ pkgs.mopidy-spotify ];
       configuration = builtins.readFile "/etc/nixos/mopidy/mopidy.conf";
