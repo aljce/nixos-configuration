@@ -3,7 +3,7 @@ set -e
 
 DISK="$1"
 
-echo "This will wipe the drive $/dev/sda irrevocably, you have ten seconds to C-c"
+echo "This will wipe the drive $DISK irrevocably, you have ten seconds to C-c"
 sleep 10
 
 parted $DISK mklabel gpt
