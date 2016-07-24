@@ -54,7 +54,6 @@ in
     w3m
     rtorrent
     parted
-    taskwarrior
     ag
 
     # Encryption
@@ -68,17 +67,18 @@ in
     # Fun
     ncmpcpp
     cmatrix
+    nethack
 
     # Emacs
     html2text
     offlineimap
     mu
     ledger
-    hunspell
     # (hunspellWithDicts [hunspellDicts.en-us])
 
     # Haskell
     stack
+    cabal-install
     cabal2nix
 
     # Rust
