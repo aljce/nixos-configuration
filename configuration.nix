@@ -5,6 +5,7 @@ in
   imports =
     [
       ./hardware-configuration.nix
+      ./layer3com.nix
     ] ++
     (if graphical then [./xserver.nix] else []);
 
@@ -45,8 +46,6 @@ in
     # Basic Command line interfaces
     which
     wget
-    git
-    gitAndTools.hub
     tmux
     tree
     vim
@@ -55,6 +54,12 @@ in
     rtorrent
     parted
     ag
+    zathura
+
+    # Version Control
+    git
+    gitAndTools.hub
+    darcs
 
     # Encryption
     openssl

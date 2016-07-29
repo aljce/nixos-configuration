@@ -7,6 +7,7 @@
     firefox
     xclip
     screenfetch
+    dmenu
   ];
   services = {
     xserver = {
