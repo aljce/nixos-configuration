@@ -26,7 +26,7 @@ sda             8:0    0 238.5G  0 disk
 # Configure networking
 nix-env --install git vim
 git clone https://github.com/mckeankylej/nixos-configuration.git
-nixos-configuration/partition /dev/sdX
+./nixos-configuration/partition /dev/sdX
 cp -r nixos-configuration/* /mnt/etc/nixos
 # Make personal changes to /mnt/etc/nixos/configuration.nix and other modules
 nixos-install

@@ -94,7 +94,7 @@ in
     cargo
 
     # Web Development
-    npm
+    nodePackages.npm
   ];
 
   fonts = {
