@@ -28,10 +28,6 @@
         };
         default = "xmonad";
       };
-      # synaptics = {
-      #   enable = true;
-      #   twoFingerScroll = true;
-      # };
     };
   };
 }

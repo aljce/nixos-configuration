@@ -29,7 +29,9 @@ in
   hardware.cpu.intel.updateMicrocode = true;
 
   programs = {
-    bash.enableCompletion = true;
+    zsh = {
+      enable = true;
+    };
     light.enable = true;
   };
 
@@ -55,6 +57,7 @@ in
     parted
     ag
     zathura
+    unzip
 
     # Version Control
     git
@@ -89,6 +92,9 @@ in
     # Rust
     rustc
     cargo
+
+    # Web Development
+    npm
   ];
 
   fonts = {
@@ -111,10 +117,13 @@ in
     };
   };
 
-  users.users.kyle = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" ];
-    initialPassword = "password";
+  users = {
+    defaultUserShell = "/run/current-system/sw/bin/zsh";
+    users.kyle = {
+      isNormalUser = true;
+      extraGroups = [ "wheel" ];
+      initialPassword = "password";
+    };
   };
 
   system.stateVersion = "16.09";
