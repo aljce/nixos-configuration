@@ -5,7 +5,6 @@ in
   imports =
     [
       ./hardware-configuration.nix
-      ./layer3com.nix
     ] ++
     (if graphical then [./xserver.nix] else []);
 
@@ -29,9 +28,7 @@ in
   hardware.cpu.intel.updateMicrocode = true;
 
   programs = {
-    zsh = {
-      enable = true;
-    };
+    zsh.enable = true;
     light.enable = true;
   };
 
@@ -71,6 +68,7 @@ in
 
     # Scripting
     python
+    nix-repl
 
     # Fun
     ncmpcpp
@@ -78,10 +76,13 @@ in
     nethack
 
     # Emacs
-    html2text
+    pythonPackages.html2text
+    imagemagick
     offlineimap
+    msmtp
     mu
     ledger
+    reckon
     # (hunspellWithDicts [hunspellDicts.en-us])
 
     # Haskell
@@ -94,7 +95,14 @@ in
     cargo
 
     # Web Development
-    nodePackages.npm
+    nodejs
+    npm2nix
+    nodePackages.gulp
+    nodePackages.bower
+    haskellPackages.purescript
+
+    # Java
+    eclipses.eclipse-sdk-46
   ];
 
   fonts = {
@@ -107,13 +115,18 @@ in
     ];
   };
 
-  i18n.consoleFont = "sun12x22";
-
+  i18n = {
+   consoleFont = "sun12x22";
+  };
   services = {
-   mopidy = {
+    mopidy = {
       enable = true;
       extensionPackages = [ pkgs.mopidy-spotify ];
       configuration = builtins.readFile "/etc/nixos/mopidy/mopidy.conf";
+    };
+    postgresql = {
+      enable = true;
+      package = pkgs.postgresql;
     };
   };
 

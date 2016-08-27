@@ -13,6 +13,8 @@
     xserver = {
       enable = true;
       layout = "us";
+      xkbVariant = "dvp";
+      xkbOptions = "caps:swapescape";
       desktopManager = {
         default = "none";
         xterm.enable = false;
