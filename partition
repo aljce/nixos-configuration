@@ -28,7 +28,7 @@ lvcreate -L 30G vg -n nix
 lvcreate -L 10G vg -n var
 lvcreate -l 100%FREE vg -n home
 
-mkfs.vfat -n BOOT $PART_ONE
+mkfs.vfat -F32 -n BOOT $PART_ONE
 mkfs.btrfs -L root /dev/mapper/vg-root
 mkfs.btrfs -L nix  /dev/mapper/vg-nix
 mkfs.btrfs -L var  /dev/mapper/vg-var

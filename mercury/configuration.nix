@@ -1,12 +1,12 @@
-
+{ config, pkgs, ...}:
 {
   imports =
     [
       ./hardware-configuration.nix
-      ./users.nix
-      ./xserver.nix
-      ./programs.nix
-    ]
+      ../users.nix
+      ../xserver.nix
+      ../programs.nix
+    ];
 
   boot = {
     loader = {
@@ -39,7 +39,7 @@
     darcs
 
     eclipses.eclipse-sdk-46
-  ]
+  ];
 
   services = {
     mopidy = {

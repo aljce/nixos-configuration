@@ -17,7 +17,6 @@
     rtorrent
     parted
     ag
-    zathura
     unzip
 
     # Version Control
