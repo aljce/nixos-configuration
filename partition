@@ -3,13 +3,16 @@ set -e
 
 DISK="$1"
 
-echo "This will wipe the drive $DISK irrevocably, you have ten seconds to C-c"
-sleep 10
+read -p "Is the firmware [B]IOS or [U]EFI: " FIRMWARE
+echo $FIRMWARE
 
 parted $DISK mklabel gpt
 parted -s $DISK mkpart primary fat16 1MiB 513MiB
 parted -s $DISK mkpart primary ext4 513MiB 100%
 parted -s $DISK set 1 boot on
+if [ $FIRMWARE == "BIOS" ] then
+   parted -s $DISK set 1 bios_grub on
+fi
 parted -s $DISK name 1 Boot
 parted -s $DISK name 2 Root
 
