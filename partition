@@ -3,14 +3,20 @@ set -e
 
 DISK="$1"
 
-read -p "Is the firmware [B]IOS or [U]EFI: " FIRMWARE
-echo $FIRMWARE
+while true; do
+    read -p "Is the firmware [B]IOS or [U]EFI: " FIRMWARE
+    case $FIRMWARE in
+        [Bb] | [Bb][Ii][Oo][Ss] ) IS_BIOS=1; break;;
+        [Uu] | [Uu][Ee][Ff][Ii] ) IS_BIOS=0; break;;
+        * ) echo "Please enter B or U";;
+    esac
+done
 
 parted $DISK mklabel gpt
 parted -s $DISK mkpart primary fat16 1MiB 513MiB
 parted -s $DISK mkpart primary ext4 513MiB 100%
 parted -s $DISK set 1 boot on
-if [ $FIRMWARE == "BIOS" ] then
+if [ $FIRMWARE ]; then
    parted -s $DISK set 1 bios_grub on
 fi
 parted -s $DISK name 1 Boot
