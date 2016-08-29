@@ -59,3 +59,4 @@ mount /dev/mapper/vg-var  /mnt/var
 mount /dev/mapper/vg-home /mnt/home
 
 nixos-generate-config --root /mnt
+git remote set-url origin git@github.com:mckeankylej/nixos-configuration
