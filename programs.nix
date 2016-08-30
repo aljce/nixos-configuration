@@ -1,5 +1,6 @@
 { config, pkgs, ... }:
-{
+{ nixpkgs.config.allowUnfree = true;
+
   programs = {
     zsh.enable = true;
     light.enable = true;
@@ -45,6 +46,10 @@
     mu
     ledger
     reckon
+
+    haskellPackages.apply-refact
+    haskellPackages.hlint
+    haskellPackages.hindent
     # (hunspellWithDicts [hunspellDicts.en-us])
 
     # Haskell
