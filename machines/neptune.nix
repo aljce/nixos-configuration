@@ -2,10 +2,10 @@
 {
   imports =
     [
-      ./hardware-configuration.nix
-      ./users.nix
-      ./sshd.nix
-      ./programs.nix
+      ../hardware-configuration.nix
+      ../users.nix
+      ../sshd.nix
+      ../programs.nix
     ];
 
   boot = {
@@ -23,10 +23,7 @@
 
   hardware.cpu.intel.updateMicrocode = true;
 
-  networking = {
-    hostName = "braavos";
-    networkmanager.enable = true;
-  };
+  networking.networkmanager.enable = true;
 
   time.timeZone = "America/New_York";
 
