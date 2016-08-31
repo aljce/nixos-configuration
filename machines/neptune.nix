@@ -4,6 +4,7 @@
     [
       ./hardware-configuration.nix
       ./users.nix
+      ./sshd.nix
       ./programs.nix
     ];
 
