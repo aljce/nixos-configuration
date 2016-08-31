@@ -6,7 +6,7 @@
       isNormalUser = true;
       extraGroups = [ "wheel" ];
       initialPassword = "password";
-      openssh.authorizedKeys.keyFiles = [ ./public-keys/kyle.pub ];
+      openssh.authorizedKeys.keyFiles = [ ./public-keys/kyle/mercury.pub ];
     };
   };
 }
