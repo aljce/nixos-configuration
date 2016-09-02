@@ -3,11 +3,11 @@
   environment.systemPackages = with pkgs; [
     # X11
     haskellPackages.xmobar
-    rxvt_unicode
     firefox
     xclip
     screenfetch
     dmenu
+    zathura
   ];
   services = {
     xserver = {

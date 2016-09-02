@@ -19,6 +19,7 @@
     parted
     ag
     unzip
+    rxvt_unicode
 
     # Version Control
     git
