@@ -1,13 +1,11 @@
-{ config, pkgs, ...}:
-{
-  imports =
-    [
-      ../hardware-configuration.nix
-      ../users.nix
-      ../xserver.nix
-      ../programs.nix
-      ../fonts.nix
-    ];
+{ pkgs, ... }:
+{ imports = [
+    ../hardware-configuration.nix
+    ../users.nix
+    ../xserver.nix
+    ../programs.nix
+    ../fonts.nix
+  ];
 
   boot = {
     loader = {

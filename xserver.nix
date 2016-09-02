@@ -1,6 +1,5 @@
-{ config, pkgs, ... }:
-{
-  environment.systemPackages = with pkgs; [
+{ pkgs, ... }:
+{ environment.systemPackages = with pkgs; [
     # X11
     haskellPackages.xmobar
     firefox

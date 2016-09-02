@@ -1,12 +1,10 @@
-{ config, pkgs, ...}:
-{
-  imports =
-    [
-      ../hardware-configuration.nix
-      ../users.nix
-      ../sshd.nix
-      ../programs.nix
-    ];
+{ pkgs, ... }:
+{ imports = [
+    ../hardware-configuration.nix
+    ../users.nix
+    ../services/sshd.nix
+    ../programs.nix
+  ];
 
   boot = {
     loader.grub = {
@@ -30,8 +28,7 @@
   hardware.cpu.intel.updateMicrocode = true;
 
   networking.firewall = {
-    allowedTCPPorts = [ 22 53 80 443 ];
-    allowedUDPPorts = [ 53 ];
+    allowedTCPPorts = [ 22 80 443 ];
   };
 
   time.timeZone = "America/New_York";
@@ -41,11 +38,7 @@
   ];
 
   services = {
-    httpd = {
-      enable = true;
-      hostName = "mckean.io";
-      adminAddr = "kyle@mckean.io";
-    };
   };
+
   system.stateVersion = "16.09";
 }
