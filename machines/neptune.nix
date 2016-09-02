@@ -1,12 +1,10 @@
-{ config, pkgs, ...}:
-{
-  imports =
-    [
-      ./hardware-configuration.nix
-      ./users.nix
-      ./sshd.nix
-      ./programs.nix
-    ];
+{ pkgs, ... }:
+{ imports = [
+    ../hardware-configuration.nix
+    ../users.nix
+    ../services/sshd.nix
+    ../programs.nix
+  ];
 
   boot = {
     loader.grub = {
@@ -14,18 +12,23 @@
       version = 2;
       device = "/dev/sda";
     };
-    initrd.luks.devices = [{
-      name = "root";
-      device = "/dev/sda3";
-      preLVM = true;
-    }];
+    initrd = {
+      luks.devices = [{
+        name = "root";
+        device = "/dev/sda3";
+        preLVM = true;
+      }];
+      network.ssh = {
+        enable = true;
+        authorizedKeys = [ builtins.readFile ../public-keys/kyle/mercucy.pub ];
+      };
+    };
   };
 
   hardware.cpu.intel.updateMicrocode = true;
 
-  networking = {
-    hostName = "braavos";
-    networkmanager.enable = true;
+  networking.firewall = {
+    allowedTCPPorts = [ 22 80 443 ];
   };
 
   time.timeZone = "America/New_York";

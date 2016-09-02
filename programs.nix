@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 { nixpkgs.config.allowUnfree = true;
 
   programs = {
@@ -19,6 +19,9 @@
     parted
     ag
     unzip
+
+    # Supported Terminal Emulators
+    rxvt_unicode
 
     # Version Control
     git

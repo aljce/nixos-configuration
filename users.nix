@@ -1,6 +1,4 @@
-{ config, pkgs, ... }:
-{
-  users = {
+{ users = {
     defaultUserShell = "/run/current-system/sw/bin/zsh";
     users.kyle = {
       isNormalUser = true;
