@@ -37,6 +37,7 @@
     darcs
 
     eclipses.eclipse-sdk-46
+    sbt
   ];
 
   services = {
