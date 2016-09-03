@@ -1,0 +1,49 @@
+! urxvt {{{
+URxvt.internalBorder:  10
+URxvt.loginShell:      true
+URxvt.scrollBar:       false
+! }}}
+
+! fonts {{{
+URxvt.font:     xft:Source Code Pro:size=20
+URxvt.boldFont: xft:Source Code Pro:bold:size=20
+! }}}
+
+! colors {{{
+! special
+*.foreground:   #b2b2b2
+*.background:   #292b2e
+*.cursorColor:  #444155
+
+! black
+*.color0:       #222226
+*.color8:       #212026
+
+! red
+*.color1:       #ce537a
+*.color9:       #e0211d
+
+! green
+*.color2:       #2d9574
+*.color10:      #67b11b
+
+! yellow
+*.color3:       #9f8766
+*.color11:      #b1951d
+
+! blue
+*.color4:       #4f97d7
+*.color12:      #7590db
+
+! orange
+*.color5:       #a45bad
+*.color13:      #bc63c5
+
+! cyan
+*.color6:       #2aa1ee
+*.color14:      #4f97d7
+
+! white
+*.color7:       #b2b2b2
+*.color15:      #cbc1d5
+! }}}

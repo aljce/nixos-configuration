@@ -1,0 +1,67 @@
+#!/usr/bin/env bash
+set -e
+
+DISK="$1"
+
+while true; do
+    read -p "Is the firmware [B]IOS or [U]EFI: " B_OR_U
+    case $B_OR_U in
+        [Bb] | [Bb][Ii][Oo][Ss] ) FIRMWARE=BIOS; break;;
+        [Uu] | [Uu][Ee][Ff][Ii] ) FIRMWARE=UEFI; break;;
+        * ) echo "Please enter B or U";;
+    esac
+done
+
+
+parted $DISK mklabel gpt
+INDEX=1
+PARTITION=1
+if [ $FIRMWARE == BIOS ]; then
+    parted -s $DISK mkpart primary fat32 "$INDEX"MiB"" "$((INDEX + 1))MiB"
+    INDEX=$((INDEX + 1))
+    parted -s $DISK set $PARTITION bios_grub on
+    parted -s $DISK name $PARTITION Grub
+    PARTITION=$((PARTITION + 1))
+fi
+parted -s $DISK mkpart primary fat32 "$INDEX"MiB"" "$((INDEX + 512))MiB"
+INDEX=$((INDEX + 512))
+parted -s $DISK set $PARTITION boot on
+parted -s $DISK name $PARTITION Boot
+BOOT_PART="$DISK$PARTITION"
+PARTITION=$((PARTITION + 1))
+parted -s $DISK mkpart primary ext4 "$INDEX"MiB"" 100%
+parted -s $DISK name $PARTITION Root
+ROOT_PART="$DISK$PARTITION"
+
+cryptsetup luksFormat $ROOT_PART
+cryptsetup open --type luks $ROOT_PART lvm
+
+pvcreate -ff /dev/mapper/lvm
+
+vgcreate vg /dev/mapper/lvm
+
+lvcreate -L 10G vg -n root
+lvcreate -L 30G vg -n nix
+lvcreate -L 10G vg -n var
+lvcreate -l 100%FREE vg -n home
+
+mkfs.vfat -F32 -n BOOT $BOOT_PART
+mkfs.btrfs -L root /dev/mapper/vg-root
+mkfs.btrfs -L nix  /dev/mapper/vg-nix
+mkfs.btrfs -L var  /dev/mapper/vg-var
+mkfs.btrfs -L home /dev/mapper/vg-home
+
+mount /dev/mapper/vg-root /mnt
+mkdir /mnt/boot /mnt/nix /mnt/var /mnt/home
+mount $BOOT_PART /mnt/boot
+mount /dev/mapper/vg-nix  /mnt/nix
+mount /dev/mapper/vg-var  /mnt/var
+mount /dev/mapper/vg-home /mnt/home
+
+nixos-generate-config --root /mnt
+cd /mnt/etc/nixos
+git init
+git remote add origin $HOME/nixos-configuration
+git pull origin master
+git remote set-url origin git@github.com:mckeankylej/nixos-configuration
+git branch -u origin/master
