@@ -24,6 +24,9 @@ class Dotfile:
             else:
                 copy(src, dest)
 
+class DotfileDir:
+    def __init__(self, config,  2)
+
 parser = argparse.ArgumentParser(description='Dotfile Installation Manager')
 parser.add_argument('resources', metavar='DIR', type=str,
                     help='The directory that holds all the resources needed for installation')
