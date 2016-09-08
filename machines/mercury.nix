@@ -33,6 +33,10 @@
   # Experimental Packeges
   environment.systemPackages = with pkgs; [
     darcs
+    calc
+
+    rustracer
+    python3
 
     eclipses.eclipse-sdk-46
     sbt

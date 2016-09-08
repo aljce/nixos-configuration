@@ -8,6 +8,8 @@
     dmenu
     zathura
   ];
+  nixpkgs.config.firefox.enableAdobeFlash = true;
+
   services = {
     xserver = {
       enable = true;
