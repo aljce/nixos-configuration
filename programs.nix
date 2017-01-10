@@ -34,6 +34,7 @@
 
     # Scripting
     python
+    python3
     nix-repl
 
     # Fun
@@ -57,8 +58,9 @@
 
     # Haskell
     stack
+    # haskell.packages.ghc7102.stack
     cabal-install
-    cabal2nix
+    # cabal2nix
 
     # Rust
     rustc

@@ -5,6 +5,7 @@
     ../xserver.nix
     ../programs.nix
     ../fonts.nix
+    ../layer3.nix
   ];
 
   boot = {
@@ -24,7 +25,10 @@
     '';
   };
 
-  hardware.cpu.intel.updateMicrocode = true;
+  hardware = {
+    cpu.intel.updateMicrocode = true;
+    bluetooth.enable = true;
+  };
 
   networking.networkmanager.enable = true;
 
@@ -34,13 +38,15 @@
   environment.systemPackages = with pkgs; [
     darcs
     calc
-
-    rustracer
-    python3
-
-    eclipses.eclipse-sdk-46
-    sbt
+    # haskellPackages.Agda
+    jdk
+    travis
   ];
+
+  nix = {
+    trustedBinaryCaches = [ "https://nixcache.reflex-frp.org" ];
+    binaryCachePublicKeys = [ "ryantrinkle.com-1:JJiAKaRv9mWgpVAz8dwewnZe0AzzEAzPkagE9SP5NWI=" ];
+  };
 
   services = {
     mopidy = {
