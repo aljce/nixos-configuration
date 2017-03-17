@@ -9,26 +9,19 @@
   ];
 
   boot = {
-    loader = {
-      systemd-boot.enable = true;
-      efi.canTouchEfiVariables = true;
+    loader.grub = {
+      enable = true;
+      device = "/dev/sda";
     };
     initrd.luks.devices = [{
       name = "root";
-      device = "/dev/sda2";
+      device = "/dev/sda3";
       preLVM = true;
       allowDiscards = true;
     }];
-    extraModprobeConfig = ''
-      options snd_mia index=0
-      options snd_hda_intel index=1
-    '';
   };
 
-  hardware = {
-    cpu.intel.updateMicrocode = true;
-    bluetooth.enable = true;
-  };
+  hardware.cpu.intel.updateMicrocode = true;
 
   networking.networkmanager.enable = true;
 
@@ -49,11 +42,6 @@
   };
 
   services = {
-    mopidy = {
-      enable = true;
-      extensionPackages = [ pkgs.mopidy-spotify ];
-      configuration = builtins.readFile "/etc/nixos/mopidy/mopidy.conf";
-    };
     postgresql = {
       enable = true;
       package = pkgs.postgresql;
