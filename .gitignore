@@ -1,3 +1,2 @@
-mopidy.conf
 hardware-configuration.nix
-.hostname
+hostname

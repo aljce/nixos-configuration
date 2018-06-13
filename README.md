@@ -1,22 +1,22 @@
 # NixOS Configuration Files
-I keep two things in these files:
+I keep the following things in this repo:
 * System wide packages
-* Hardware specific configuration files for a *lenovo y50-70* 
+* Dotfiles
+* Hardware specific configuration files for a *Purism Librem 15v3*
 
-All other configuration files can be found in my [dotfiles repo](https://github.com/mckeankyle/dotfiles)
 # Disk Partioning
 /boot is unencrypted
 All other partions are encrypted
 ```sh
-NAME          MAJ:MIN RM   SIZE RO TYPE  MOUNTPOINT
-sda             8:0    0 238.5G  0 disk
-├─sda1          8:1    0   512M  0 part  /boot
-└─sda2          8:2    0   238G  0 part
-  └─root      254:0    0   238G  0 crypt 
-    ├─vg-root 254:1    0    10G  0 lvm   /
-    ├─vg-nix  254:2    0    30G  0 lvm   /nix
-    ├─vg-var  254:3    0    10G  0 lvm   /var
-    └─vg-home 254:4    0   188G  0 lvm   /home
+NAME           SIZE   TYPE  MOUNTPOINT
+nvme0n1          477G disk  
+├─nvme0n1p1        1M part  
+├─nvme0n1p2      512M part  /boot
+└─nvme0n1p3    476.4G part  
+  └─root       476.4G crypt 
+    ├─zfs-root        zfs   /
+    ├─zfs-nix         zfs   /nix
+    └─zfs-home        zfs   /home
 ```
 
 # Install
@@ -26,8 +26,9 @@ sda             8:0    0 238.5G  0 disk
 # Configure networking
 nix-env --install git vim
 git clone https://github.com/mckeankylej/nixos-configuration.git
-./nixos-configuration/partition /dev/sdX
+./nixos-configuration/partition $DEVICE
 cp -r nixos-configuration/* /mnt/etc/nixos
 # Make personal changes to /mnt/etc/nixos/configuration.nix and other modules
 nixos-install
 ```
+

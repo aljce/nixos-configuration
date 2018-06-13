@@ -1,10 +1,13 @@
 { users = {
-    defaultUserShell = "/run/current-system/sw/bin/zsh";
-    users.kyle = {
-      isNormalUser = true;
-      extraGroups = [ "wheel" ];
-      initialPassword = "password";
-      openssh.authorizedKeys.keyFiles = [ ./public-keys/kyle/mercury.pub ];
+    mutableUsers = false;
+    defaultUserShell = pkgs.zsh;
+    users = { 
+      root.hashedPassword = "$6$BODlVLZlOPHCm$A4bcOGjOYOlVBftIXu0Fb8Cf7Kna0qUKIcON8F2uNK4SNHjsSuiEq/T5TYd4sR0RAtkK9/rB4t5J0Akm36hmd1";
+      amckean = {
+        isNormalUser = true;
+        extraGroups = [ "wheel" ];
+        hashedPassword = "$6$BODlVLZlOPHCm$A4bcOGjOYOlVBftIXu0Fb8Cf7Kna0qUKIcON8F2uNK4SNHjsSuiEq/T5TYd4sR0RAtkK9/rB4t5J0Akm36hmd1";
+      };
     };
   };
 }

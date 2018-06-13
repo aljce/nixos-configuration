@@ -1,12 +1,5 @@
 { pkgs, ... }:
-{ nixpkgs.config.allowUnfree = true;
-
-  programs = {
-    zsh.enable = true;
-    light.enable = true;
-  };
-
-  environment.systemPackages = with pkgs; [
+{ environment.systemPackages = with pkgs; [
     # Basic Command line interfaces
     which
     wget
@@ -28,49 +21,34 @@
     gitAndTools.hub
 
     # Encryption
-    openssl
     gnupg
-    pass
 
     # Scripting
-    python
-    python3
     nix-repl
 
     # Fun
     ncmpcpp
     cmatrix
     nethack
-
-    # Emacs
-    pythonPackages.html2text
-    imagemagick
-    offlineimap
-    msmtp
-    mu
-    ledger
-    reckon
-
-    haskellPackages.apply-refact
-    haskellPackages.hlint
-    haskellPackages.hindent
-    # (hunspellWithDicts [hunspellDicts.en-us])
-
-    # Haskell
-    stack
-    # haskell.packages.ghc7102.stack
-    cabal-install
-    # cabal2nix
-
-    # Rust
-    rustc
-    cargo
-
-    # Web Development
-    nodejs
-    npm2nix
-    nodePackages.gulp
-    nodePackages.bower
-    haskellPackages.purescript
   ];
+
+  programs.zsh = {
+    enable = true;
+    enableAutosuggestions = true;
+    syntaxHighlighting = {
+      enable = true;
+      highlighters = [ "main" "brackets" "root" ];
+    };
+    ohMyZsh = {
+      enable = true;
+      plugins = [ "git" ];
+      theme = "lambda";
+    };
+  };
+ 
+  programs.ssh = {
+    startAgent = true;
+    agentTimeout = "1h";
+  };
 }
+  

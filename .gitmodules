@@ -1,7 +1,0 @@
-[submodule "resources/submodules/spacemacs"]
-	path = resources/submodules/spacemacs
-	url = https://github.com/syl20bnr/spacemacs.git
-	branch = develop
-[submodule "resources/submodules/antigen"]
-	path = resources/submodules/antigen
-	url = https://github.com/zsh-users/antigen.git
