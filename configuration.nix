@@ -1,4 +1,4 @@
-let hostname = builtins.replaceStrings [ "\n" ] [ "" ] (builtins.readFile ./.hostname);
+let hostname = builtins.replaceStrings [ "\n" ] [ "" ] (builtins.readFile ./hostname);
 in
 { imports = [ (./machines + "/${hostname}.nix") ];
 
