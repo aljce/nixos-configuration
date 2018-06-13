@@ -4,6 +4,7 @@
     ../users.nix
     ../programs.nix
     ../fonts.nix
+    ../dotfiles.nix
   ];
 
   boot.loader.grub.enable = true;
