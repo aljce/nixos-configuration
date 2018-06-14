@@ -4,6 +4,7 @@
     ../users.nix
     ../programs.nix
     ../fonts.nix
+    ../xserver.nix
     ../dotfiles.nix
   ];
 

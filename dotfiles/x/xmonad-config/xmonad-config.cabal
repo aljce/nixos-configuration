@@ -1,0 +1,24 @@
+name:                xmonad-config
+version:             0.1.0.0
+synopsis:            Wrapper to make intero check my xmonad config.
+description:         Please see README.md
+homepage:            https://github.com/mckeankylej/dotfiles#readme
+license:             BSD3
+license-file:        ../../LICENSE
+author:              Kyle McKean
+maintainer:          mckeankylej@gmail.com
+copyright:           2016 Kyle McKean
+category:            Development
+build-type:          Simple
+-- extra-source-files:
+cabal-version:       >=1.10
+
+executable xmonad-config
+  hs-source-dirs:      app
+  main-is:             xmonad.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base
+                     , containers
+                     , xmonad
+                     , xmonad-contrib
+  default-language:    Haskell2010

@@ -5,7 +5,7 @@ in
     # symlink all the files in $1 to $2, $1 needs to be an absolute path
     linkdir() {
       for f in $(find $1 -maxdepth 1 -type f -printf '%P\n'); do
-        ln -s -b -v $1/$f $2/$f;
+        ln -s -f -v $1/$f $2/$f;
       done
     }
 
