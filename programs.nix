@@ -30,6 +30,9 @@
     ncmpcpp
     cmatrix
     nethack
+  
+    # Battery
+    acpi
   ];
 
   programs.zsh = {

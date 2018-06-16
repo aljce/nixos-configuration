@@ -2,9 +2,12 @@
 { environment.systemPackages = with pkgs; [
     # X11
     haskellPackages.xmobar
+    feh
     firefox
+    google-chrome
     xclip
     screenfetch
+    shutter
     dmenu
     zathura
   ];
@@ -15,10 +18,10 @@
       layout = "us";
       xkbVariant = "dvp";
       xkbOptions = "caps:swapescape";
-      # desktopManager = {
-      #   default = "none";
-      #   xterm.enable = false;
-      # };
+      desktopManager = {
+        default = "none";
+        xterm.enable = false;
+      };
       displayManager.lightdm = {
         enable = true;
         background = "/usr/share/wallpaper";
@@ -33,4 +36,6 @@
       libinput.enable = true;
     };
   };
+  
+  programs.light.enable = true;
 }

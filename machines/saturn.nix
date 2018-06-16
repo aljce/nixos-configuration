@@ -3,8 +3,10 @@
     ../hardware-configuration.nix
     ../users.nix
     ../programs.nix
+    ../nix.nix
     ../fonts.nix
     ../xserver.nix
+    ../audio.nix
     ../dotfiles.nix
   ];
 

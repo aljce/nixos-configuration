@@ -5,8 +5,8 @@ URxvt.scrollBar:       false
 ! }}}
 
 ! fonts {{{
-URxvt.font:     xft:Source Code Pro:size=20
-URxvt.boldFont: xft:Source Code Pro:bold:size=20
+URxvt.font:     xft:Source Code Pro:size=10
+URxvt.boldFont: xft:Source Code Pro:bold:size=10
 ! }}}
 
 ! colors {{{

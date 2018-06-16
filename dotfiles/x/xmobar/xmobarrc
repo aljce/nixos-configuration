@@ -1,9 +1,9 @@
-Config { font = "xft:Source Code Pro:size=18"
+Config { font = "xft:Source Code Pro:size=10"
        , additionalFonts = []
        , bgColor = "#292b2e"
        , fgColor = "#b2b2b2"
        , alpha = 255
-       , position = Static { xpos = 20, ypos = 20, width = 1880, height = 50 }
+       , position = Static { xpos = 5, ypos = 5, width = 1910, height = 30 }
        , lowerOnStart = False
        , hideOnStart = False
        , allDesktops = True
@@ -22,7 +22,7 @@ Config { font = "xft:Source Code Pro:size=18"
                                    , "--normal"   , "#4f97d7"
                                    , "--high"     , "#e0211d"
                                    ] 10
-                    , Run BatteryP ["BAT1"]
+                    , Run BatteryP ["BAT"]
                                    [ "--template" , "Batt: <acstatus>"
                                    , "--Low"      , "20"        -- units: %
                                    , "--High"     , "80"        -- units: %

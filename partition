@@ -12,6 +12,12 @@ while true; do
     esac
 done
 
+case $2 in
+	-n  ) NVME="p";  break;;
+	--n ) NVME="p";  break;;
+	*   ) NVME="";;
+esac
+
 parted $DISK mklabel gpt
 INDEX=1
 PARTITION=1
@@ -26,11 +32,11 @@ parted -s $DISK mkpart primary fat32 "$INDEX"MiB"" "$((INDEX + 512))MiB"
 INDEX=$((INDEX + 512))
 parted -s $DISK set $PARTITION boot on
 parted -s $DISK name $PARTITION Boot
-BOOT_PART="$DISK$PARTITION"
+BOOT_PART="$DISK$NVME$PARTITION"
 PARTITION=$((PARTITION + 1))
 parted -s $DISK mkpart primary ext4 "$INDEX"MiB"" 100%
 parted -s $DISK name $PARTITION Root
-ROOT_PART="$DISK$PARTITION"
+ROOT_PART="$DISK$NVME$PARTITION"
 
 mkfs.vfat -F32 -n BOOT $BOOT_PART
 

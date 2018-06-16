@@ -23,7 +23,7 @@ myTerminal = "urxvt"
 
 myFocusFollowsMouse = True
 
-myBorderWidth = 4
+myBorderWidth = 1
 
 myModMask = mod1Mask
 
@@ -39,8 +39,8 @@ myXmobarWindowColor  = "#bc6ec5"
 
 myKeys conf =
   [ ("M-<Return>", spawn (terminal conf))
-  , ("M-f",   spawn"firefox")
-  , ("M-e",   spawn "emacs")
+  , ("M-w",   spawn "google-chrome-stable")
+  , ("M-e",   spawn "emacss")
   , ("<XF86MonBrightnessDown>", spawn "light -U 10")
   , ("<XF86MonBrightnessUp>"  , spawn "light -A 10")
   , ("<XF86AudioLowerVolume>" , spawn "amixer set Master 5%-")
@@ -63,7 +63,7 @@ myKeys conf =
 myMouseBindings (XConfig {XMonad.modMask = modm}) = M.empty
 
 myLayout = (avoidStruts . fullscreenFull) (nTall ||| full)
-  where nTall = spacing 20 (Tall 1 (3/100) (1/2))
+  where nTall = spacing 5 (Tall 1 (3/100) (1/2))
         full  = noBorders Full
 
 myManageHook = manageDocks
