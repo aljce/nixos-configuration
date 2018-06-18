@@ -3,6 +3,7 @@
     ../hardware-configuration.nix
     ../users.nix
     ../programs.nix
+    ../networking.nix
     ../nix.nix
     ../fonts.nix
     ../xserver.nix
@@ -20,7 +21,6 @@
     }
   ];
 
-  networking.wireless.enable = true;
   networking.hostId = "39bae8d0";
 
   time.timeZone = "America/New_York";
