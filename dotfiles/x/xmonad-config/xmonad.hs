@@ -10,6 +10,7 @@ import XMonad.Layout.MultiToggle
 import XMonad.Layout.NoBorders
 import XMonad.Layout.MultiToggle.Instances
 import XMonad.Hooks.SetWMName
+import XMonad.Hooks.ManageHelpers
 import XMonad.Layout.Minimize
 import XMonad.Layout.Fullscreen
 import XMonad.Util.Paste
@@ -18,8 +19,9 @@ import System.Exit
 import Control.Concurrent.MVar
 import qualified XMonad.StackSet as W
 import qualified Data.Map as M
+import Data.Monoid ((<>))
 
-myTerminal = "urxvt"
+myTerminal = "st"
 
 myFocusFollowsMouse = True
 
@@ -60,13 +62,13 @@ myKeys conf =
   | (ws,wsId) <- zip (workspaces conf) "&[{}(=*)+]"
   , (f ,shf) <- [(W.greedyView,""),(\w -> W.greedyView w . W.shift w ,"-S")]]
 
-myMouseBindings (XConfig {XMonad.modMask = modm}) = M.empty
+myMouseBindings XConfig {XMonad.modMask = modm} = M.empty
 
 myLayout = (avoidStruts . fullscreenFull) (nTall ||| full)
   where nTall = spacing 5 (Tall 1 (3/100) (1/2))
         full  = noBorders Full
 
-myManageHook = manageDocks
+myManageHook = manageDocks <> (isFullscreen --> doFullFloat)
 
 myEventHook = docksEventHook
 
@@ -99,5 +101,6 @@ myConfig xmproc = def {
 
 main :: IO ()
 main = do
+  spawn "/run/current-system/sw/bin/feh --bg-scale /usr/share/wallpaper"
   xmproc <- spawnPipe "/run/current-system/sw/bin/xmobar /home/amckean/.xmobarrc"
   xmonad $ myConfig xmproc

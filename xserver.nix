@@ -1,6 +1,7 @@
 { pkgs, ... }:
 { environment.systemPackages = with pkgs; [
     # X11
+    st
     haskellPackages.xmobar
     feh
     firefox
@@ -10,6 +11,26 @@
     shutter
     dmenu
     zathura
+    (
+    neovim.override {
+      configure = {
+        customRC = ''
+	        source ~/.SpaceVim/vimrc
+	      '';
+        vam = {
+          knownPlugins = vimPlugins;
+          pluginDictionaries = [
+            { name = "vimproc"; }
+          ];
+        };
+      };
+    }
+    )
+    xorg.mkfontdir
+    xorg.mkfontscale
+    slack
+    vlc
+    arandr
   ];
 
   services = {
@@ -36,6 +57,6 @@
       libinput.enable = true;
     };
   };
-  
+
   programs.light.enable = true;
 }
