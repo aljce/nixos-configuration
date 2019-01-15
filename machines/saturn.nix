@@ -1,5 +1,5 @@
 { config, pkgs, ... }:
-{ imports = [ 
+{ imports = [
     ../hardware-configuration.nix
     ../users.nix
     ../programs.nix
@@ -9,6 +9,8 @@
     ../xserver.nix
     ../audio.nix
     ../dotfiles.nix
+    /home/amckean/repos/nixos-configs/netboot_server.nix
+    /home/amckean/repos/nixos-configs/qemu.nix
   ];
 
   boot.loader.grub.enable = true;
@@ -22,6 +24,16 @@
   ];
 
   networking.hostId = "39bae8d0";
+
+  networking.usePredictableInterfaceNames = false;
+
+  # UNGODLY HACKS
+  netboot_server.network = {
+    lan = "eth0";
+    wan = "wlan0";
+  };
+
+  qemu-user.aarch64 = true;
 
   time.timeZone = "America/New_York";
 

@@ -19,6 +19,8 @@ in
     parted
     ag
     unzip
+    xxd
+    tcpdump
 
     neovim
 
@@ -37,14 +39,25 @@ in
     ncmpcpp
     cmatrix
     nethack
-  
+
     # Battery
     acpi
 
     # Haskell
     cabal2nix
-    cabal-install
+    # cabal-install
+    haskellPackages.stylish-haskell
     hies.hie82
+
+    # Agda
+    (import ./programs/agda { inherit pkgs; })
+
+    # Latex
+    (texlive.combine {
+      inherit (texlive) scheme-full;
+    })
+    aspell
+    aspellDicts.en
   ];
 
   programs.zsh = {
@@ -60,10 +73,9 @@ in
       theme = "lambda";
     };
   };
- 
+
   programs.ssh = {
     startAgent = true;
     agentTimeout = "1h";
   };
 }
-  

@@ -42,7 +42,7 @@ myXmobarWindowColor  = "#bc6ec5"
 myKeys conf =
   [ ("M-<Return>", spawn (terminal conf))
   , ("M-w",   spawn "google-chrome-stable")
-  , ("M-e",   spawn "emacss")
+  , ("M-e",   spawn "emacs")
   , ("<XF86MonBrightnessDown>", spawn "light -U 10")
   , ("<XF86MonBrightnessUp>"  , spawn "light -A 10")
   , ("<XF86AudioLowerVolume>" , spawn "pactl -- set-sink-volume -5%")

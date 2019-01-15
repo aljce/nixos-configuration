@@ -11,6 +11,7 @@
     shutter
     dmenu
     zathura
+    evince
     (
     neovim.override {
       configure = {
@@ -31,6 +32,7 @@
     slack
     vlc
     arandr
+    wireshark
   ];
 
   services = {
