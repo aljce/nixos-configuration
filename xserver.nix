@@ -12,21 +12,6 @@
     dmenu
     zathura
     evince
-    (
-    neovim.override {
-      configure = {
-        customRC = ''
-	        source ~/.SpaceVim/vimrc
-	      '';
-        vam = {
-          knownPlugins = vimPlugins;
-          pluginDictionaries = [
-            { name = "vimproc"; }
-          ];
-        };
-      };
-    }
-    )
     xorg.mkfontdir
     xorg.mkfontscale
     slack
@@ -54,7 +39,6 @@
           enable = true;
           enableContribAndExtras = true;
         };
-        # default = "xmonad";
       };
       libinput.enable = true;
     };

@@ -9,8 +9,6 @@
     ../xserver.nix
     ../audio.nix
     ../dotfiles.nix
-    /home/amckean/repos/nixos-configs/netboot_server.nix
-    /home/amckean/repos/nixos-configs/qemu.nix
   ];
 
   boot.loader.grub.enable = true;
@@ -27,15 +25,12 @@
 
   networking.usePredictableInterfaceNames = false;
 
-  # UNGODLY HACKS
-  netboot_server.network = {
-    lan = "eth0";
-    wan = "wlan0";
-  };
-
-  qemu-user.aarch64 = true;
-
   time.timeZone = "America/New_York";
 
-  system.stateVersion = "18.03";
+  system.stateVersion = "19.03";
+
+  services.postgresql = {
+    enable = true;
+    package = pkgs.postgresql_10;
+  };
 }
