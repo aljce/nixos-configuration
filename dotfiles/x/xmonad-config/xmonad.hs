@@ -21,7 +21,7 @@ import qualified XMonad.StackSet as W
 import qualified Data.Map as M
 import Data.Monoid ((<>))
 
-myTerminal = "st"
+myTerminal = "alacritty"
 
 myFocusFollowsMouse = True
 

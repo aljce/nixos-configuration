@@ -2,6 +2,7 @@
 { environment.systemPackages = with pkgs; [
     # X11
     st
+    alacritty
     haskellPackages.xmobar
     feh
     firefox

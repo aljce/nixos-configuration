@@ -16,6 +16,9 @@ stdenv.mkDerivation {
     mkdir -p $out/.config/nixpkgs
     cp ./nixpkgs/config.nix $out/.config/nixpkgs/config.nix
 
+    mkdir -p $out/.config/alacritty
+    cp ./alacritty/alacritty.yml $out/.config/alacritty/alacritty.yml
+
     cp ./rtorrent/rtorrent.rc $out/.rtorrent.rc
  '';
 }
