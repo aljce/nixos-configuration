@@ -58,9 +58,14 @@ myKeys conf =
   , ("M-S-r", spawn "xmonad --recompile; xmonad --restart")
   , ("M-S-q", io exitSuccess)
   ] ++
-  [("M"++ shf ++ "-" ++ [wsId], windows (f ws))
-  | (ws,wsId) <- zip (workspaces conf) "&[{}(=*)+]"
-  , (f ,shf) <- [(W.greedyView,""),(\w -> W.greedyView w . W.shift w ,"-S")]]
+  [ ("M" ++ shf ++ "-" ++ [key], windows (f ws))
+  | (ws, key) <- zip (workspaces conf) "&[{}(=*)+]"
+  , (f,  shf) <- [ (W.greedyView,""), (\w -> W.greedyView w . W.shift w ,"-S") ]
+  ] ++
+  [ ("M" ++ shf ++ "-" ++ [key], screenWorkspace sc >>= flip whenJust (windows . f))
+  | (sc, key) <- zip [0..] ",.p"
+  , (f,  shf) <- [ (W.greedyView, ""), (\w -> W.greedyView w . W.shift w, "-S") ]
+  ]
 
 myMouseBindings XConfig {XMonad.modMask = modm} = M.empty
 

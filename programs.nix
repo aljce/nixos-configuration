@@ -56,6 +56,9 @@
     # Javascript
     yarn
     watchman
+
+    # AWS
+    aws
   ];
 
   programs.zsh = {
@@ -76,4 +79,6 @@
     startAgent = true;
     agentTimeout = "1h";
   };
+
+  programs.gnupg.agent.enable = true;
 }

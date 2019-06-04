@@ -25,9 +25,12 @@
 
   networking.usePredictableInterfaceNames = false;
 
-  time.timeZone = "America/New_York";
+  time.timeZone = "America/Los_Angeles";
 
   system.stateVersion = "19.03";
+
+  hardware.u2f.enable = true;
+  hardware.bluetooth.enable = true;
 
   services.postgresql = {
     enable = true;
