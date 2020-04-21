@@ -23,7 +23,8 @@
 
   networking.hostId = "39bae8d0";
 
-  networking.usePredictableInterfaceNames = false;
+  # networking.usePredictableInterfaceNames = false;
+  networking.networkmanager.wifi.macAddress = "permanant";
 
   time.timeZone = "America/Los_Angeles";
 
@@ -32,8 +33,13 @@
   hardware.u2f.enable = true;
   hardware.bluetooth.enable = true;
 
-  services.postgresql = {
-    enable = true;
-    package = pkgs.postgresql_10;
+  services = {
+    postgresql = {
+      enable = true;
+      package = pkgs.postgresql_10;
+    };
+    elasticsearch = {
+      enable = true;
+    };
   };
 }

@@ -14,8 +14,9 @@
     xxd
     tcpdump
     vim
-
     neovim
+    gnumake
+    parallel
 
     # Version Control
     git
@@ -55,10 +56,15 @@
 
     # Javascript
     yarn
+    yarn2nix
     watchman
 
     # AWS
     aws
+    ec2-api-tools
+
+    # Math
+    sage
   ];
 
   programs.zsh = {

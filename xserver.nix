@@ -19,6 +19,9 @@
     vlc
     arandr
     wireshark
+    mumble
+    keybase
+    keybase-gui
   ];
 
   services = {
@@ -28,7 +31,9 @@
       xkbVariant = "dvp";
       xkbOptions = "caps:swapescape";
       desktopManager = {
-        default = "none";
+        plasma5 = {
+          enable = true;
+        };
         xterm.enable = false;
       };
       displayManager.lightdm = {
@@ -43,6 +48,7 @@
       };
       libinput.enable = true;
     };
+    keybase.enable = true;
   };
 
   programs.light.enable = true;
