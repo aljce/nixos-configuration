@@ -1,10 +1,10 @@
-{ compiler ? "ghc864" }:
+{ compiler ? "ghc883" }:
 let fetchNixpkgs = import ./fetchNixpkgs.nix;
     nixpkgs-src = fetchNixpkgs {
       owner  = "NixOS";
       repo   = "nixpkgs";
-      rev    = "6a3a05560a41371977671935ef3d926c6a5225fa";
-      sha256 = "08w0vny70pmz6zvpw9y32md502n2758r05qy6hrd5gszg523zqas";
+      rev    = "5272327b81ed355bbed5659b8d303cf2979b6953"; # 20.23
+      sha256 = "0182ys095dfx02vl2a20j1hz92dx3mfgz2a6fhn31bqlp1wa8hlq";
     };
     nixpkgs = import nixpkgs-src {
       config = {

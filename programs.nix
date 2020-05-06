@@ -41,11 +41,10 @@
     # Haskell
     cabal2nix
     stack
-    stack2nix
     haskellPackages.stylish-haskell
 
     # Agda
-    (import ./programs/agda {})
+    (import ./programs/agda {}) 
 
     # Latex
     (texlive.combine {
@@ -56,12 +55,10 @@
 
     # Javascript
     yarn
-    yarn2nix
     watchman
 
     # AWS
     aws
-    ec2-api-tools
 
     # Math
     sage

@@ -14,6 +14,7 @@ import XMonad.Hooks.ManageHelpers
 import XMonad.Layout.Minimize
 import XMonad.Layout.Fullscreen
 import XMonad.Util.Paste
+import XMonad.Config.Kde
 
 import System.Exit
 import Control.Concurrent.MVar
@@ -87,7 +88,7 @@ myStartupHook conf= do
   return () --fixpoint of the startupHook, layoutHook loop
   checkKeymap conf (myKeys conf)
 
-myConfig xmproc = def {
+myConfig xmproc = kde4Config {
   terminal           = myTerminal,
   focusFollowsMouse  = myFocusFollowsMouse,
   borderWidth        = myBorderWidth,
@@ -100,12 +101,12 @@ myConfig xmproc = def {
   layoutHook         = myLayout,
   manageHook         = myManageHook,
   handleEventHook    = myEventHook,
-  logHook            = myLogHook xmproc,
+  logHook            = mempty, 
   startupHook        = myStartupHook (myConfig xmproc) }
 
 
 main :: IO ()
 main = do
-  spawn "/run/current-system/sw/bin/feh --bg-scale /usr/share/wallpaper"
-  xmproc <- spawnPipe "/run/current-system/sw/bin/xmobar /home/amckean/.xmobarrc"
-  xmonad $ myConfig xmproc
+  -- spawn "/run/current-system/sw/bin/feh --bg-scale /usr/share/wallpaper"
+  -- xmproc <- spawnPipe "/run/current-system/sw/bin/xmobar /home/alice/.xmobarrc"
+  xmonad $ myConfig undefined

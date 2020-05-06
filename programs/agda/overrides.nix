@@ -12,8 +12,8 @@ with pkgs.haskell.lib;
       AgdaSource = pkgs.fetchFromGitHub {
         repo = "agda";
         owner = "agda";
-        rev = "48c9d8fe35adca8c2e309bf64e99b26b25a90169";
-        sha256 = "0sj6m75ikdc4adbqm0ladis18l09q92jv3sbcv1r0w7ja2i6z5fh";
+        rev = "8eb0d01811a663cf2b27b482b3b18690adfa094b";
+        sha256 = "18kf2q6j8y605hw1byjil49wf3dvm2m98wq6kr5qpk9k8pw51ghz";
       };
       AgdaBasic = dontHaddock (dontCheck (self.callCabal2nix "Agda" AgdaSource { }));
     };

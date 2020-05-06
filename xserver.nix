@@ -46,7 +46,7 @@
           enableContribAndExtras = true;
         };
       };
-      libinput.enable = true;
+      # libinput.enable = true;
     };
     keybase.enable = true;
   };
