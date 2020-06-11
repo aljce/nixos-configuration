@@ -2,24 +2,25 @@
 
 {
   imports =
-    [ ../hardware-configuration.nix
-      ../users.nix
-      ../programs.nix
-      ../networking.nix
-      ../nix.nix
-      ../fonts.nix
-      ../xserver.nix
-      ../dotfiles.nix
+    [ ../system/users.nix
+      ../system/programs.nix
+      ../system/networking.nix
+      ../system/nix.nix
+      ../system/fonts.nix
+      ../home/home-manager.nix
+      ../home/programs.nix
+      ../home/wayland.nix
     ];
 
+  boot.supportedFilesystems = [ "zfs" ];
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.initrd.luks.devices = [
-    { name = "root";
-      device = "/dev/nvme1n1p2";
-    }
-  ];
-  services.xserver.videoDrivers = [ "nvidia" ];
+  boot.initrd.luks.devices.crypt-root = {
+    device = "/dev/nvme1n1p2";
+  };
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+  hardware.enableRedistributableFirmware = true;
+  services.xserver.videoDrivers = [ "amdgpu" ];
 
   networking.hostId = "f182f5a7";
 

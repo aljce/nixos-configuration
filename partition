@@ -1,58 +1,49 @@
 #!/usr/bin/env bash
+# Usage: partition /dev/diskname
 set -e
-
 DISK="$1"
 
-while true; do
-    read -p "Is the firmware [B]IOS or [U]EFI: " B_OR_U
-    case $B_OR_U in
-        [Bb] | [Bb][Ii][Oo][Ss] ) FIRMWARE=BIOS; break;;
-        [Uu] | [Uu][Ee][Ff][Ii] ) FIRMWARE=UEFI; break;;
-        * ) echo "Please enter B or U";;
-    esac
-done
+echo "PARTITIONING..."
 
-case $2 in
-	-n  ) NVME="p";  break;;
-	--n ) NVME="p";  break;;
-	*   ) NVME="";;
-esac
+parted $DISK -- mklabel gpt
+parted -s $DISK -- mkpart ESP fat32 1MiB 512MiB
+parted -s $DISK -- set 1 boot on
+parted -s $DISK -- name 1 Boot
 
-parted $DISK mklabel gpt
-INDEX=1
-PARTITION=1
-if [ $FIRMWARE == BIOS ]; then
-    parted -s $DISK mkpart primary fat32 "$INDEX"MiB"" "$((INDEX + 1))MiB"
-    INDEX=$((INDEX + 1))
-    parted -s $DISK set $PARTITION bios_grub on
-    parted -s $DISK name $PARTITION Grub
-    PARTITION=$((PARTITION + 1))
-fi
-parted -s $DISK mkpart primary fat32 "$INDEX"MiB"" "$((INDEX + 512))MiB"
-INDEX=$((INDEX + 512))
-parted -s $DISK set $PARTITION boot on
-parted -s $DISK name $PARTITION Boot
-BOOT_PART="$DISK$NVME$PARTITION"
-PARTITION=$((PARTITION + 1))
-parted -s $DISK mkpart primary ext4 "$INDEX"MiB"" 100%
-parted -s $DISK name $PARTITION Root
-ROOT_PART="$DISK$NVME$PARTITION"
+parted -s $DISK -- mkpart primary 512MiB 100%
+parted -s $DISK -- name 2 Root
 
-mkfs.vfat -F32 -n BOOT $BOOT_PART
+export BOOT_PARTITION=$(lsblk $DISK -r -p -n --sort NAME | sed '2q;d' | awk '{print $1}')
+export ROOT_PARTITION=$(lsblk $DISK -r -p -n --sort NAME | sed '3q;d' | awk '{print $1}')
+export CRYPT_DEVICE="crypt-root"
 
-cryptsetup luksFormat $ROOT_PART
-cryptsetup open --type luks $ROOT_PART root
+echo "FORMATTING..."
+echo "BOOT PARTITION = $BOOT_PARTITION"
+echo "ROOT PARTITION = $ROOT_PARTITION"
+echo "CRYPT PARTITION = /dev/mapper/$CRYPT_DEVICE"
 
-zpool create -o ashift=12 -o altroot=/mnt -O compression=lz4 rpool $ROOT_PART
+mkfs.vfat -F32 -n BOOT $BOOT_PARTITION
+
+cryptsetup --pbkdf argon2i -s 512 --use-random luksFormat $ROOT_PARTITION
+cryptsetup luksOpen $ROOT_PARTITION $CRYPT_DEVICE
+
+zpool create -o ashift=12 -O mountpoint=none -O normalization=formD -O compression=lz4 rpool /dev/mapper/$CRYPT_DEVICE
 zfs create -o mountpoint=legacy rpool/root
 zfs create -o mountpoint=legacy rpool/home
 zfs create -o mountpoint=legacy rpool/nix
+zfs create -o mountpoint=legacy rpool/var
+
+echo "MOUNTING..."
 
 mkdir -p /mnt
 mount -t zfs rpool/root /mnt
-mkdir /mnt/{home,nix,boot}
+mkdir /mnt/{boot,home,nix,var}
 mount -t zfs rpool/home /mnt/home
 mount -t zfs rpool/nix  /mnt/nix
-mount        $BOOT_PART /mnt/boot
+mount -t zfs rpool/var  /mnt/var
+
+mount $BOOT_PARTITION /mnt/boot
+
+echo "GENERATING..."
 
 nixos-generate-config --root /mnt

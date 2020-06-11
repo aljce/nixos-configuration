@@ -13,7 +13,7 @@ nvme0n1          477G disk
 ├─nvme0n1p1        1M part  
 ├─nvme0n1p2      512M part  /boot
 └─nvme0n1p3    476.4G part  
-  └─root       476.4G crypt 
+  └─crypt-root 476.4G crypt 
     ├─zfs-root        zfs   /
     ├─zfs-nix         zfs   /nix
     └─zfs-home        zfs   /home
@@ -28,7 +28,7 @@ nix-env --install git vim
 git clone https://github.com/mckeankylej/nixos-configuration.git
 ./nixos-configuration/partition $DEVICE
 cp -r nixos-configuration/* /mnt/etc/nixos
-# Make personal changes to /mnt/etc/nixos/configuration.nix and other modules
+# Make personal changes to /mnt/etc/nixos
 nixos-install
 ```
 
