@@ -1,5 +1,5 @@
-{ config, pkgs, ... }:
-{ home-manager.users.alice = {
+user: { config, pkgs, ... }:
+{ home-manager.users.${user.userid} = {
     services = {
       gpg-agent = {
         enable = true;
@@ -10,7 +10,7 @@
         enable = false;
         settings = {
           global = {
-            username = "mckeankylej";
+            username = user.username;
             password = "secret";
             device_name = config.networking.hostName;
           };
@@ -20,8 +20,8 @@
     programs = {
       git = {
         enable = true;
-        userName = "Alice McKean";
-        userEmail = "mckean.kylej@gmail.com";
+        userName = user.legal-name;
+        userEmail = user.email;
       };
       gpg.enable = true;
       htop.enable = true;

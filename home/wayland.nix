@@ -1,9 +1,9 @@
-{ pkgs, lib, ... }:
+user: { pkgs, lib, ... }:
 let fonts = [ "source-code-pro 10" ];
     modifier = "Mod1";
 in
 { programs.sway.enable = true; 
-  home-manager.users.alice = {
+  home-manager.users.${user.userid} = {
     wayland.windowManager.sway = {
       enable = true;
       config = {
@@ -54,10 +54,11 @@ in
     };
     services = {
       redshift = {
-        enable = false;
+        enable = true;
+        package = pkgs.redshift-wlr;
         provider = "geoclue2";
       };
     };
   };
-  services.geoclue2.enable = false;
+  services.geoclue2.enable = true;
 }

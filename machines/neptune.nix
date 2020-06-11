@@ -7,9 +7,8 @@
       ../system/networking.nix
       ../system/nix.nix
       ../system/fonts.nix
-      ../home/home-manager.nix
-      ../home/programs.nix
-      ../home/wayland.nix
+      ../system/home-manager.nix
+      ../home/alice.nix
     ];
 
   boot.supportedFilesystems = [ "zfs" ];
@@ -26,6 +25,6 @@
 
   time.timeZone = "America/Los_Angeles";
 
-  system.stateVersion = "19.09";
+  system.stateVersion = "20.03";
 }
 
