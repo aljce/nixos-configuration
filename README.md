@@ -19,6 +19,13 @@ nvme0n1          477G disk
     └─zfs-home        zfs   /home
 ```
 
+# Iso Images
+```sh
+cd install
+nix-build iso.nix
+sudo dd if=result/<iso> of=<dev> 
+```
+
 # Install
 *WARNING* The following steps create an entire operating system this goes without saying but backup your data on the device you choose.
 ```sh
