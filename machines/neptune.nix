@@ -4,6 +4,7 @@
   imports =
     [ ../system/users.nix
       ../system/programs.nix
+      ../system/audio.nix
       ../system/networking.nix
       ../system/nix.nix
       ../system/fonts.nix
@@ -21,6 +22,7 @@
   hardware.enableRedistributableFirmware = true;
   services.xserver.videoDrivers = [ "amdgpu" ];
 
+  hardware.bluetooth.enable = true;
   networking.hostId = "f182f5a7";
 
   time.timeZone = "America/Los_Angeles";

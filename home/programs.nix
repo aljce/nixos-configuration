@@ -3,15 +3,15 @@ user: { config, pkgs, ... }:
     services = {
       gpg-agent = {
         enable = true;
-        pinentryFlavor = "tty";
+        pinentryFlavor = "gtk2";
       };
       keybase.enable = true;
       spotifyd = {
-        enable = false;
+        enable = true;
         settings = {
           global = {
-            username = user.username;
-            password = "secret";
+            username = user.email;
+            password_cmd = "pass show spotify.com | head -n 1";
             device_name = config.networking.hostName;
           };
         };

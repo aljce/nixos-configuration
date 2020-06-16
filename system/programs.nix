@@ -14,5 +14,6 @@
     vim
     gnumake
     parallel
+    findutils
   ];
 }
