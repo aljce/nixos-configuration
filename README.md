@@ -1,7 +1,5 @@
 # NixOS Configuration Files
 Everything in this repo is fully declarative. You should be able to go from zero to OS in 15 minutes.
-
-# Structure
 ## Artwork
 Contains various backgrounds I have collected over the years.
 ## Home
@@ -13,7 +11,8 @@ Dotfiles
 Any configuration that will apply to all users on a machine usually hardware specific configuration.
 
 # Install
-*WARNING* The following steps create an entire operating system this goes without saying but backup your data on the device you choose.
+*WARNING* The following steps create an entire operating system.
+This goes without saying but backup your data on the device you choose.
 ```sh
 cd install
 nix-build iso.nix
