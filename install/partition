@@ -1,17 +1,34 @@
 #!/usr/bin/env bash
-# Usage: partition /dev/diskname
+# Usage: partition --device /dev/diskname --bios ([l]egacy|[u]efi)
 set -e
-DISK="$1"
 
-echo "PARTITIONING..."
+while [[ "$#" -gt 0 ]]; do
+	case $1 in
+		-b|--bios) BIOS="$2"; shift ;;
+		-d|--device) DISK="$2"; shift ;;
+		*) echo "Unknown paramter passed: $1"; exit 1 ;;
+	esac
+	shift
+done
 
-parted $DISK -- mklabel gpt
-parted -s $DISK -- mkpart ESP fat32 1MiB 512MiB
-parted -s $DISK -- set 1 boot on
-parted -s $DISK -- name 1 Boot
+case $BIOS in
+  	l|legacy) LEGACY=true ;;
+	u|uefi) LEGACY=false ;;
+  	*) echo "The bios flag must be one of [l]egacy or [u]efi"; exit 1 ;;
+esac
 
+echo "DEVICE = $DISK"
+echo "BIOS = $BIOS"
+
+if [ "$LEGACY" = true ]; then
+	parted $DISK -- mklabel msdos 
+	parted -s $DISK -- mkpart primary fat32 1MiB 512MiB
+else
+	parted $DISK -- mklabel gpt
+	parted -s $DISK -- mkpart ESP fat32 1MiB 512MiB
+	parted -s $DISK -- set 1 boot on
+fi
 parted -s $DISK -- mkpart primary 512MiB 100%
-parted -s $DISK -- name 2 Root
 
 export BOOT_PARTITION=$(lsblk $DISK -r -p -n --sort NAME | sed '2q;d' | awk '{print $1}')
 export ROOT_PARTITION=$(lsblk $DISK -r -p -n --sort NAME | sed '3q;d' | awk '{print $1}')
@@ -46,4 +63,5 @@ mount $BOOT_PARTITION /mnt/boot
 
 echo "GENERATING..."
 
-nixos-generate-config --root /mnt
+git clone https://github.com/mckeankylej/nixos-configuration /mnt/etc/nixos
+nixos-generate-config --show-hardware-config --root /mnt >> /mnt/etc/nixos/hardware-configuration.nix
