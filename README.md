@@ -21,6 +21,7 @@ sudo dd if=result/<iso> of=/dev/<usb>
 # Configure networking
 partition --device /dev/<harddrive> --bios ([l]egacy|[u]efi)
 # Make personal changes to /mnt/etc/nixos
+echo "<hostname>" >> /mnt/etc/nixos/hostname # Must match the name of the file in /machines
 nixos-install
 ```
 

@@ -2,7 +2,7 @@ user: { pkgs, lib, ... }:
 let swayfont = "source-code-pro 10";
     modifier = "Mod1";
 in
-{ imports = [ ./waybar.nix ];
+{ # imports = [ ./waybar.nix ];
   programs.sway.enable = true; 
   home-manager.users.${user.userid} = {
     wayland.windowManager.sway = {
@@ -22,7 +22,7 @@ in
         };
         output = {
           "*" = {
-            bg = "${../artwork/fractal.png} center";
+            bg = "${../../artwork/fractal.png} center";
           };
         };
         inherit modifier;
@@ -56,7 +56,7 @@ in
         };
         bars = [];
         startup = [{
-          command = "exec systemctl --user restart waybar.service";
+          command = "exec ";
           always = true;
         }];
       };

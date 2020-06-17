@@ -1,7 +1,5 @@
 { config, pkgs, ... }:
-
-{
-  imports =
+{ imports =
     [ ../system/users.nix
       ../system/programs.nix
       ../system/audio.nix
@@ -9,7 +7,8 @@
       ../system/nix.nix
       ../system/fonts.nix
       ../system/home-manager.nix
-      ../home/alice.nix
+      ../home/modules
+      ../home/alice
     ];
 
   boot.supportedFilesystems = [ "zfs" ];
