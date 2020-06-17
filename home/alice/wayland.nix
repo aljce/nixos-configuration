@@ -2,9 +2,9 @@ user: { pkgs, lib, ... }:
 let swayfont = "source-code-pro 10";
     modifier = "Mod1";
 in
-{ # imports = [ ./waybar.nix ];
-  programs.sway.enable = true; 
+{ programs.sway.enable = true; 
   home-manager.users.${user.userid} = {
+    imports = [ ../modules/waybar.nix ];
     wayland.windowManager.sway = {
       enable = true;
       config = {
@@ -56,9 +56,21 @@ in
         };
         bars = [];
         startup = [{
-          command = "exec ";
+          command = "exec systemctl --user restart waybar.service";
           always = true;
         }];
+      };
+    };
+    services = {
+      waybar = {
+        enable = true;
+        settings = builtins.readFile ./waybar/config;
+        style = builtins.readFile ./waybar/style.css;
+      };
+      redshift = {
+        enable = true;
+        package = pkgs.redshift-wlr;
+        provider = "geoclue2";
       };
     };
     home.packages = with pkgs; [
@@ -88,13 +100,6 @@ in
         enable = true;
       };
       rofi.enable = true;
-    };
-    services = {
-      redshift = {
-        enable = true;
-        package = pkgs.redshift-wlr;
-        provider = "geoclue2";
-      };
     };
   };
   services.geoclue2.enable = true;
