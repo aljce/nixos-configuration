@@ -1,9 +1,10 @@
-user: { pkgs, lib, ... }:
+{ pkgs, lib, ... }:
+with (import ./colors.nix);
 let swayfont = "source-code-pro 10";
     modifier = "Mod1";
 in
 { programs.sway.enable = true; 
-  home-manager.users.${user.userid} = {
+  home-manager.users.alice = {
     imports = [ ../modules/waybar.nix ];
     wayland.windowManager.sway = {
       enable = true;
@@ -30,6 +31,7 @@ in
           "${modifier}+d" = "exec rofi -show run | xargs swaymsg exec --";
           "${modifier}+c" = "kill";
           "${modifier}+Shift+c" = "exit";
+          "${modifier}+Shift+r" = "reload";
           "${modifier}+f" = "fullscreen";
           "${modifier}+Return" = "exec alacritty";
           "${modifier}+w" = "exec firefox";
@@ -64,8 +66,38 @@ in
     services = {
       waybar = {
         enable = true;
-        settings = builtins.readFile ./waybar/config;
-        style = builtins.readFile ./waybar/style.css;
+        settings = builtins.toJSON [{
+          layer = "bottom";
+          position = "top";
+          height = 40;
+          modules-left = [ "sway/workspaces" ];
+          modules-center = [ "sway/window" ];
+          modules-right = [ "clock" ];
+          "sway/window" = {
+            format = "{}";
+            max-length = 50;
+          };
+          clock = {
+            format = "{:%H:%M}";
+            tooltip-format = "{:Y-%m-%d | %H:%M}";
+            format-alt = "{:Y-%m-%d}";
+          };
+        }];
+        style = ''
+          * {
+            border: none;
+            border-radius: 0;
+            font-family: 'Source Code Pro', 'Font Awesome 5';
+            font-size: 20px;
+            min-height: 0;
+          }
+          window#waybar {
+            background: ${dark}; 
+          }
+          window#waybar.hidden {
+            opacity: 0.2;
+          }
+        '';
       };
       redshift = {
         enable = true;

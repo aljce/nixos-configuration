@@ -1,5 +1,5 @@
-user: { config, pkgs, ... }:
-{ home-manager.users.${user.userid} = {
+{ config, pkgs, ... }:
+{ home-manager.users.alice = {
     services = {
       gpg-agent = {
         enable = true;
@@ -10,7 +10,7 @@ user: { config, pkgs, ... }:
         enable = true;
         settings = {
           global = {
-            username = user.email;
+            username = "mckean.kylej@gmail.com";
             password_cmd = "pass show spotify.com | head -n 1";
             device_name = config.networking.hostName;
           };
@@ -20,8 +20,8 @@ user: { config, pkgs, ... }:
     programs = {
       git = {
         enable = true;
-        userName = user.legal-name;
-        userEmail = user.email;
+        userName = "Alice McKean";
+        userEmail = "mckean.kylej@gmail.com";
       };
       gpg.enable = true;
       htop.enable = true;
