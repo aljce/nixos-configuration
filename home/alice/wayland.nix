@@ -1,7 +1,7 @@
 { pkgs, lib, ... }:
-with (import ./colors.nix);
 let swayfont = "source-code-pro 10";
     modifier = "Mod1";
+    colors = import ./colors.nix { inherit lib; };
 in
 { programs.sway.enable = true; 
   home-manager.users.alice = {
@@ -92,10 +92,11 @@ in
             min-height: 0;
           }
           window#waybar {
-            background: ${dark}; 
+            background: ${colors.hex colors.dark}; 
+            border-bottom: 3px solid ${colors.hex colors.primary};
           }
           window#waybar.hidden {
-            opacity: 0.2;
+            opacity: 0.0;
           }
         '';
       };
@@ -127,6 +128,32 @@ in
       };
       alacritty = {
         enable = true;
+        settings = {
+          env.TERM = "alacritty";
+          draw_bold_text_with_bright_colors = true;
+          font = {
+            normal.family = "SourceCodePro";
+            bold.family = "SourceCodePro";
+            italic.family = "SourceCodePro";
+            size = 18.0;
+            offset = {
+              x = 0;
+              y = 0;
+            };
+            glyph_offset = {
+              x = 0;
+              y = 0;
+            };
+          };
+          colors = {
+            primary = {
+              background = colors.hex colors.dark;
+              foreground = colors.hex colors.light;
+            };
+            
+          };
+          background_opacity = 0.8;
+        };
       };
       mako = {
         enable = true;

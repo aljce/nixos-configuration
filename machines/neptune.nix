@@ -6,6 +6,7 @@
       ../system/networking.nix
       ../system/nix.nix
       ../system/fonts.nix
+      ../system/crypto.nix
       ../system/home-manager.nix
       ../home/modules
       ../home/alice
