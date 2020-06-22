@@ -42,6 +42,7 @@
           ".." = "cd ..";
           "..." = "cd ../..";
           "...." = "cd ../../..";
+          "nrs" = "sudo nixos-rebuild switch";
         };
         oh-my-zsh = {
           enable = true;

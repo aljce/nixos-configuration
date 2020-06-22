@@ -1,7 +1,25 @@
 { pkgs, lib, ... }:
+with lib.cli;
 let swayfont = "source-code-pro 10";
     modifier = "Mod1";
     colors = import ./colors.nix { inherit lib; };
+    swaylock-effects = pkgs.callPackage ../packages/swaylock-effects.nix {};
+    swaylock-config = toGNUCommandLineShell {} {
+      screenshots = true;
+      clock = true;
+      indicator = true;
+      show-failed-attempts = true;
+      grace = 2;
+      effect-blur = "7x5";
+      effect-vignette = "0.6:0.6";
+      ring-color = colors.hex colors.primary;
+      key-hl-color = colors.hex colors.secondary;
+      line-color = colors.hex colors.dark-dark;
+      inside-color = "00000000";
+      separator-color = colors.hex colors.light;
+      text-color = colors.hex colors.light;
+    };
+    swaylock-command = "swaylock ${swaylock-config}";
 in
 { programs.sway.enable = true; 
   home-manager.users.alice = {
@@ -30,11 +48,11 @@ in
         keybindings = {
           "${modifier}+d" = "exec rofi -show run | xargs swaymsg exec --";
           "${modifier}+c" = "kill";
-          "${modifier}+Shift+c" = "exit";
           "${modifier}+Shift+r" = "reload";
           "${modifier}+f" = "fullscreen";
           "${modifier}+Return" = "exec alacritty";
           "${modifier}+w" = "exec firefox";
+          "${modifier}+p" = "mode power";
 
           "${modifier}+Ampersand" = "workspace number 1";
           "${modifier}+BracketLeft" = "workspace number 2";
@@ -46,21 +64,41 @@ in
 	  "${modifier}+ParenRight" = "workspace number 8";
 	  "${modifier}+Plus" = "workspace number 9";
 
-	  "${modifier}+Shift+Ampersand" = "move container to workspace number 1";
-	  "${modifier}+Shift+BracketLeft" = "move container to workspace number 2";
-	  "${modifier}+Shift+BraceLeft" = "move container to workspace number 3";
-	  "${modifier}+Shift+BraceRight" = "move container to workspace number 4";
-	  "${modifier}+Shift+ParenLeft" = "move container to workspace number 5";
-	  "${modifier}+Shift+Equal" = "move container to workspace number 6";
-	  "${modifier}+Shift+Asterisk" = "move container to workspace number 7";
-	  "${modifier}+Shift+ParenRight" = "move container to workspace number 8";
-	  "${modifier}+Shift+Plus" = "move container to workspace number 9";
+	  "${modifier}+Shift+Ampersand" = "move container to workspace number 1, workspace number 1";
+	  "${modifier}+Shift+BracketLeft" = "move container to workspace number 2, workspace number 2";
+	  "${modifier}+Shift+BraceLeft" = "move container to workspace number 3, workspace number 3";
+	  "${modifier}+Shift+BraceRight" = "move container to workspace number 4, workspace number 4";
+	  "${modifier}+Shift+ParenLeft" = "move container to workspace number 5, workspace number 5";
+	  "${modifier}+Shift+Equal" = "move container to workspace number 6, workspace number 6";
+	  "${modifier}+Shift+Asterisk" = "move container to workspace number 7, workspace number 7";
+	  "${modifier}+Shift+ParenRight" = "move container to workspace number 8, workspace number 8";
+	  "${modifier}+Shift+Plus" = "move container to workspace number 9, workspace number 9";
+        };
+        modes = {
+          power = {
+            "l" = "exec ${swaylock-command}, mode default";
+            "e" = "exit";
+            "r" = "exec systemctl reboot";
+            "s" = "exec systemctl poweroff -i";
+            "p" = "mode default";
+            "Escape" = "mode default";
+            "Return" = "mode default";
+          };
         };
         bars = [];
-        startup = [{
-          command = "exec systemctl --user restart waybar.service";
-          always = true;
-        }];
+        startup = [
+          { command = "exec systemctl --user restart waybar.service";
+            always = true;
+          }
+          { command = ''
+              swayidle -w \
+                timeout 300 '${swaylock-command}' \
+                timeout 600 'swaymsg "output * dpms off"' \
+                      resume 'swaymsg "output * dpms on"' \
+            '';
+            always = false;
+          }
+        ];
       };
     };
     services = {
@@ -70,7 +108,7 @@ in
           layer = "bottom";
           position = "top";
           height = 40;
-          modules-left = [ "sway/workspaces" ];
+          modules-left = [ "sway/workspaces" "sway/modes" ];
           modules-center = [ "sway/window" ];
           modules-right = [ "clock" ];
           "sway/window" = {
@@ -107,6 +145,7 @@ in
       };
     };
     home.packages = with pkgs; [
+      swaylock-effects
       xwayland
       wl-clipboard
       rofi

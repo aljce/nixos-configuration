@@ -13,7 +13,6 @@ with rec {
               else { index = n.index + 1; found = false; };
         radix = (foldl searcher { index = 0; found = false; } chars).index;
     in fromJSON (concatStrings (take radix chars));
-  # realMod = x: y: x - y * floor (x / y);
   realMod = x: y: 
     let i = floor x;
         frac = x - i;
@@ -74,19 +73,19 @@ with rec {
     in { inherit red green blue; };
   raise-value = p: hsv: 
     { value = clamp ((1 + p) * hsv.value); inherit (hsv) hue saturation; };
-  brighten = rgb: hsv-to-rgb (raise-value 0.1 (rgb-to-hsv rgb));
-  darken = rgb: hsv-to-rgb (raise-value (- 0.1) (rgb-to-hsv rgb));
+  brighten = rgb: hsv-to-rgb (raise-value 0.2 (rgb-to-hsv rgb));
+  darken = rgb: hsv-to-rgb (raise-value (- 0.2) (rgb-to-hsv rgb));
 };
-with {
+rec { 
   rich-black = rgb "060A16";
   middle-green = rgb "5F9057";
   harvest-gold = rgb "D49221";
   cadet-grey = rgb "97AEBE";
   bittersweet-shimmer = rgb "B85653";
   dark-liver = rgb "45454B";
-};
-rec { 
-  primary = harvest-gold;
+  malachite = rgb "1ED761";
+
+  primary = rgb "E27D60";
   primary-light = brighten primary;
   primary-dark = darken primary;
   secondary = bittersweet-shimmer;
