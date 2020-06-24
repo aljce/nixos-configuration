@@ -32,6 +32,11 @@
       };
       browserpass.enable = true;
       ssh.enable = true;
+      lsd = {
+        enable = true;
+        enableAliases = true;
+      };
+      jq.enable = true;
       texlive.enable = true;
       tmux.enable = true;
       zathura.enable = true;

@@ -9,14 +9,21 @@ let swayfont = "source-code-pro 10";
       clock = true;
       indicator = true;
       show-failed-attempts = true;
+      ignore-empty-password = true;
       grace = 2;
       effect-blur = "7x5";
       effect-vignette = "0.6:0.6";
       ring-color = colors.hex colors.primary;
-      key-hl-color = colors.hex colors.secondary;
-      line-color = colors.hex colors.dark-dark;
+      ring-ver-color = colors.hex colors.green;
+      ring-wrong-color = colors.hex colors.red;
+      key-hl-color = colors.hex colors.accent;
+      line-color = "00000000";
+      line-ver-color = "00000000";
+      line-wrong-color = "00000000";
       inside-color = "00000000";
-      separator-color = colors.hex colors.light;
+      inside-ver-color = "00000000";
+      inside-wrong-color = "00000000";
+      separator-color = "00000000";
       text-color = colors.hex colors.light;
     };
     swaylock-command = "swaylock ${swaylock-config}";
@@ -44,6 +51,14 @@ in
             bg = "${../../artwork/fractal.png} center";
           };
         };
+        colors.focused = {
+          background = colors.hex colors.dark;
+          border = colors.hex colors.accent;
+          text = colors.hex colors.light;
+          childBorder = colors.hex colors.accent;
+          indicator = colors.hex colors.secondary;
+        };
+        window.border = 2;
         inherit modifier;
         keybindings = {
           "${modifier}+d" = "exec rofi -show run | xargs swaymsg exec --";
@@ -53,6 +68,8 @@ in
           "${modifier}+Return" = "exec alacritty";
           "${modifier}+w" = "exec firefox";
           "${modifier}+p" = "mode power";
+          "${modifier}+n" = "exec makoctl dismiss";
+          "${modifier}+Shift+n" = "exec makoctl dismiss -a";
 
           "${modifier}+Ampersand" = "workspace number 1";
           "${modifier}+BracketLeft" = "workspace number 2";
@@ -74,6 +91,7 @@ in
 	  "${modifier}+Shift+ParenRight" = "move container to workspace number 8, workspace number 8";
 	  "${modifier}+Shift+Plus" = "move container to workspace number 9, workspace number 9";
         };
+        workspaceAutoBackAndForth = true;
         modes = {
           power = {
             "l" = "exec ${swaylock-command}, mode default";
@@ -108,7 +126,7 @@ in
           layer = "bottom";
           position = "top";
           height = 40;
-          modules-left = [ "sway/workspaces" "sway/modes" ];
+          modules-left = [ "sway/workspaces" "sway/mode" ];
           modules-center = [ "sway/window" ];
           modules-right = [ "clock" ];
           "sway/window" = {
@@ -131,7 +149,7 @@ in
           }
           window#waybar {
             background: ${colors.hex colors.dark}; 
-            border-bottom: 3px solid ${colors.hex colors.primary};
+            border-bottom: 3px solid ${colors.hex colors.accent};
           }
           window#waybar.hidden {
             opacity: 0.0;
@@ -152,6 +170,7 @@ in
       waybar
       signal-desktop
       spotify-tui
+      libnotify
     ];
     xdg.configFile."environment.d/envvars.conf".text = ''
       MOZ_ENABLE_WAYLAND=1
@@ -196,6 +215,13 @@ in
       };
       mako = {
         enable = true;
+        anchor = "top-right";
+        backgroundColor = colors.hex colors.secondary;
+        textColor = colors.hex colors.light;
+        borderColor = colors.hex colors.accent;
+        borderRadius = 5;
+        borderSize = 2;
+        font = "SourceCodePro 18";
       };
       rofi.enable = true;
     };

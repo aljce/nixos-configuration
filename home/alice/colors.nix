@@ -85,13 +85,17 @@ rec {
   dark-liver = rgb "45454B";
   malachite = rgb "1ED761";
 
-  primary = rgb "E27D60";
+  black = rgb "000000";
+  red = bittersweet-shimmer;
+  green = middle-green;
+
+  primary = harvest-gold;
   primary-light = brighten primary;
   primary-dark = darken primary;
-  secondary = bittersweet-shimmer;
+  secondary = middle-green;
   secondary-light = brighten secondary;
   secondary-dark = darken secondary;
-  accent = middle-green;
+  accent = bittersweet-shimmer;
   accent-light = brighten accent;
   accent-dark = darken accent;
   dark = rich-black;
