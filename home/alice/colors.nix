@@ -43,6 +43,7 @@ with rec {
     else
       throw "no parse";
   hex = rgb: "#" + int-to-hex-pair rgb.red + int-to-hex-pair rgb.green + int-to-hex-pair rgb.blue;
+  css = rgb: a: "rgba(${toString rgb.red}, ${toString rgb.green}, ${toString rgb.blue}, ${toJSON a})";
   rgb-to-hsv = rgb:
     let norm-r = toFloat rgb.red / 255;
         norm-g = toFloat rgb.green / 255;
@@ -104,5 +105,5 @@ rec {
   light = cadet-grey;
   light-light = brighten light;
   light-dark = darken dark;
-  inherit hex brighten darken rgb-to-hsv hsv-to-rgb;
+  inherit hex css brighten darken rgb-to-hsv hsv-to-rgb;
 }

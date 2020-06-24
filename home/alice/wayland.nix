@@ -133,10 +133,13 @@ in
             format = "{}";
             max-length = 50;
           };
+          "sway/mode" = {
+            format = "{}";
+          };
           clock = {
             format = "{:%H:%M}";
-            tooltip-format = "{:Y-%m-%d | %H:%M}";
-            format-alt = "{:Y-%m-%d}";
+            tooltip-format = "{:%Y-%m-%d | %H:%M}";
+            format-alt = "{:%Y-%m-%d}";
           };
         }];
         style = ''
@@ -148,11 +151,29 @@ in
             min-height: 0;
           }
           window#waybar {
-            background: ${colors.hex colors.dark}; 
-            border-bottom: 3px solid ${colors.hex colors.accent};
+            background: ${colors.css colors.dark 0.5}; 
+            border-bottom: 3px solid ${colors.css colors.accent 0.5};
+            color: ${colors.hex colors.light};
           }
           window#waybar.hidden {
             opacity: 0.0;
+          }
+          #workspaces button {
+            padding: 0 5px;
+            background: transparent;
+            color: ${colors.hex colors.light};
+            border-bottom: 3px solid transparent;
+          } 
+          #workspaces button.focused {
+            background: ${colors.hex colors.accent};
+            border-bottom: 3px solid ${colors.hex colors.dark};
+          }
+          #workspaces button.urgent {
+            background-color: ${colors.hex colors.red};
+          }
+          #clock, #cpu, #memory, #temperature, #backlight, #network, #pulseaudio, #mode, #idle_inhibitor {
+            padding: 0 10px;
+            margin: 0 5px;
           }
         '';
       };
