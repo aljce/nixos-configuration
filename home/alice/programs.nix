@@ -17,6 +17,13 @@
         };
       };
     };
+    home.packages = with pkgs; [
+      aspell
+      aspellDicts.en
+      nodejs
+      tldr
+      nix-deploy
+    ];
     programs = {
       git = {
         enable = true;
@@ -31,11 +38,22 @@
           (exts: with exts; [ pass-otp pass-checkup pass-update pass-import ]);
       };
       browserpass.enable = true;
-      ssh.enable = true;
+      ssh = {
+        enable = true;
+        extraConfig = ''
+          Host *
+            User alice
+            IdentityFile ~/.ssh/id_rsa
+          Host *
+            User mercury
+            IdentityFile ~/.ssh/mercury
+        '';
+      };
       lsd = {
         enable = true;
         enableAliases = true;
       };
+      emacs.enable = true; # TODO: Set up spacemacs with home-manager
       jq.enable = true;
       texlive.enable = true;
       tmux.enable = true;

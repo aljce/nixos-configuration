@@ -8,6 +8,7 @@
       ../system/fonts.nix
       ../system/crypto.nix
       ../system/home-manager.nix
+      ../system/mercury.nix
       ../home/modules
       ../home/alice
     ];

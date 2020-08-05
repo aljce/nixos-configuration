@@ -13,10 +13,10 @@ let swayfont = "source-code-pro 10";
       grace = 2;
       effect-blur = "7x5";
       effect-vignette = "0.6:0.6";
-      ring-color = colors.hex colors.primary;
+      ring-color = colors.hex colors.accent;
       ring-ver-color = colors.hex colors.green;
       ring-wrong-color = colors.hex colors.red;
-      key-hl-color = colors.hex colors.accent;
+      key-hl-color = colors.hex colors.primary;
       line-color = "00000000";
       line-ver-color = "00000000";
       line-wrong-color = "00000000";
@@ -28,7 +28,7 @@ let swayfont = "source-code-pro 10";
     };
     swaylock-command = "swaylock ${swaylock-config}";
 in
-{ programs.sway.enable = true; 
+{ programs.sway.enable = true;
   home-manager.users.alice = {
     imports = [ ../modules/waybar.nix ];
     wayland.windowManager.sway = {
@@ -53,10 +53,10 @@ in
         };
         colors.focused = {
           background = colors.hex colors.dark;
-          border = colors.hex colors.accent;
+          border = colors.hex colors.primary;
           text = colors.hex colors.light;
-          childBorder = colors.hex colors.accent;
-          indicator = colors.hex colors.secondary;
+          childBorder = colors.hex colors.primary;
+          indicator = colors.hex colors.accent;
         };
         window.border = 2;
         inherit modifier;
@@ -90,6 +90,8 @@ in
 	  "${modifier}+Shift+Asterisk" = "move container to workspace number 7, workspace number 7";
 	  "${modifier}+Shift+ParenRight" = "move container to workspace number 8, workspace number 8";
 	  "${modifier}+Shift+Plus" = "move container to workspace number 9, workspace number 9";
+          "${modifier}+Shift+s" = "move scratchpad";
+          "${modifier}+s" = "scratchpad show";
         };
         workspaceAutoBackAndForth = true;
         modes = {
@@ -152,7 +154,7 @@ in
           }
           window#waybar {
             background: ${colors.css colors.dark 0.5}; 
-            border-bottom: 3px solid ${colors.css colors.accent 0.5};
+            border-bottom: 3px solid ${colors.css colors.primary 0.5};
             color: ${colors.hex colors.light};
           }
           window#waybar.hidden {
@@ -165,7 +167,7 @@ in
             border-bottom: 3px solid transparent;
           } 
           #workspaces button.focused {
-            background: ${colors.hex colors.accent};
+            background: ${colors.hex colors.primary};
             border-bottom: 3px solid ${colors.hex colors.dark};
           }
           #workspaces button.urgent {
@@ -192,6 +194,8 @@ in
       signal-desktop
       spotify-tui
       libnotify
+      wf-recorder
+      slurp
     ];
     xdg.configFile."environment.d/envvars.conf".text = ''
       MOZ_ENABLE_WAYLAND=1
@@ -237,9 +241,9 @@ in
       mako = {
         enable = true;
         anchor = "top-right";
-        backgroundColor = colors.hex colors.secondary;
+        backgroundColor = colors.hex colors.dark;
         textColor = colors.hex colors.light;
-        borderColor = colors.hex colors.accent;
+        borderColor = colors.hex colors.primary;
         borderRadius = 5;
         borderSize = 2;
         font = "SourceCodePro 18";
@@ -251,6 +255,7 @@ in
   fonts.fonts = with pkgs; [
     source-code-pro
     font-awesome
+    nerdfonts
   ];
 }
 

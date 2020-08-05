@@ -90,13 +90,13 @@ rec {
   red = bittersweet-shimmer;
   green = middle-green;
 
-  primary = harvest-gold;
+  primary = bittersweet-shimmer;
   primary-light = brighten primary;
   primary-dark = darken primary;
   secondary = middle-green;
   secondary-light = brighten secondary;
   secondary-dark = darken secondary;
-  accent = bittersweet-shimmer;
+  accent = harvest-gold;
   accent-light = brighten accent;
   accent-dark = darken accent;
   dark = rich-black;

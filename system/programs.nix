@@ -15,5 +15,6 @@
     gnumake
     parallel
     findutils
+    xorriso
   ];
 }
