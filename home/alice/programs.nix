@@ -22,6 +22,8 @@
       aspellDicts.en
       nodejs
       tldr
+      nix-deploy
+      woeusb
     ];
     programs = {
       git = {

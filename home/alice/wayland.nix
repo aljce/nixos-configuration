@@ -27,6 +27,7 @@ let swayfont = "source-code-pro 10";
       text-color = colors.hex colors.light;
     };
     swaylock-command = "swaylock ${swaylock-config}";
+    unstable-nixpkgs = import ../../system/unstable-nixpkgs.nix;
 in
 { programs.sway.enable = true;
   home-manager.users.alice = {
@@ -73,23 +74,23 @@ in
 
           "${modifier}+Ampersand" = "workspace number 1";
           "${modifier}+BracketLeft" = "workspace number 2";
-	  "${modifier}+BraceLeft" = "workspace number 3";
-	  "${modifier}+BraceRight" = "workspace number 4";
-	  "${modifier}+ParenLeft" = "workspace number 5";
-	  "${modifier}+Equal" = "workspace number 6";
-	  "${modifier}+Asterisk" = "workspace number 7";
-	  "${modifier}+ParenRight" = "workspace number 8";
-	  "${modifier}+Plus" = "workspace number 9";
+          "${modifier}+BraceLeft" = "workspace number 3";
+          "${modifier}+BraceRight" = "workspace number 4";
+          "${modifier}+ParenLeft" = "workspace number 5";
+          "${modifier}+Equal" = "workspace number 6";
+          "${modifier}+Asterisk" = "workspace number 7";
+          "${modifier}+ParenRight" = "workspace number 8";
+          "${modifier}+Plus" = "workspace number 9";
 
-	  "${modifier}+Shift+Ampersand" = "move container to workspace number 1, workspace number 1";
-	  "${modifier}+Shift+BracketLeft" = "move container to workspace number 2, workspace number 2";
-	  "${modifier}+Shift+BraceLeft" = "move container to workspace number 3, workspace number 3";
-	  "${modifier}+Shift+BraceRight" = "move container to workspace number 4, workspace number 4";
-	  "${modifier}+Shift+ParenLeft" = "move container to workspace number 5, workspace number 5";
-	  "${modifier}+Shift+Equal" = "move container to workspace number 6, workspace number 6";
-	  "${modifier}+Shift+Asterisk" = "move container to workspace number 7, workspace number 7";
-	  "${modifier}+Shift+ParenRight" = "move container to workspace number 8, workspace number 8";
-	  "${modifier}+Shift+Plus" = "move container to workspace number 9, workspace number 9";
+          "${modifier}+Shift+Ampersand" = "move container to workspace number 1, workspace number 1";
+          "${modifier}+Shift+BracketLeft" = "move container to workspace number 2, workspace number 2";
+          "${modifier}+Shift+BraceLeft" = "move container to workspace number 3, workspace number 3";
+          "${modifier}+Shift+BraceRight" = "move container to workspace number 4, workspace number 4";
+          "${modifier}+Shift+ParenLeft" = "move container to workspace number 5, workspace number 5";
+          "${modifier}+Shift+Equal" = "move container to workspace number 6, workspace number 6";
+          "${modifier}+Shift+Asterisk" = "move container to workspace number 7, workspace number 7";
+          "${modifier}+Shift+ParenRight" = "move container to workspace number 8, workspace number 8";
+          "${modifier}+Shift+Plus" = "move container to workspace number 9, workspace number 9";
           "${modifier}+Shift+s" = "move scratchpad";
           "${modifier}+s" = "scratchpad show";
         };
@@ -194,8 +195,9 @@ in
       signal-desktop
       spotify-tui
       libnotify
-      wf-recorder
       slurp
+      grim # wayland screenshot application that works
+      imv # wayland image viewer that works
     ];
     xdg.configFile."environment.d/envvars.conf".text = ''
       MOZ_ENABLE_WAYLAND=1
