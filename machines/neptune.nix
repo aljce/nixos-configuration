@@ -13,21 +13,43 @@
       ../home/alice
     ];
 
-  boot.supportedFilesystems = [ "zfs" ];
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.initrd.luks.devices.crypt-root = {
-    device = "/dev/nvme1n1p2";
+  boot = {
+    loader = {
+      efi = {
+        canTouchEfiVariables = true;
+        efiSysMountPoint = "/boot";
+      };
+      grub = {
+        enable = true;
+        devices = [ "nodev" ];
+        efiSupport = true;
+        extraEntries = ''
+          menuentry "Windows" {
+            insmod part_gpt
+            insmod fat
+            insmod search_fs_uuid
+            insmod chain
+            search --fs-uuid --set=root F6F3-4088
+            chainloader /EFI/Microsoft/Boot/bootmgfw.efi
+          }
+        '';
+      };
+    };
+    supportedFilesystems = [ "zfs" ];
+    initrd.luks.devices.crypt-root = {
+      device = "/dev/nvme0n1p1";
+    };
+    kernelPackages = pkgs.linuxPackages_latest;
   };
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+
   hardware.enableRedistributableFirmware = true;
-  services.xserver.videoDrivers = [ "amdgpu" ];
+  services.xserver.videoDrivers = [ "radeon" ];
 
   hardware.bluetooth.enable = true;
+
   networking.hostId = "f182f5a7";
 
   time.timeZone = "America/Los_Angeles";
 
-  system.stateVersion = "20.03";
+  system.stateVersion = "20.09";
 }
-

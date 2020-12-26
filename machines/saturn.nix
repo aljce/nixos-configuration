@@ -28,18 +28,8 @@
 
   time.timeZone = "America/Los_Angeles";
 
-  system.stateVersion = "19.03";
+  system.stateVersion = "20.09";
 
   hardware.u2f.enable = true;
   hardware.bluetooth.enable = true;
-
-  services = {
-    postgresql = {
-      enable = true;
-      package = pkgs.postgresql_10;
-    };
-    elasticsearch = {
-      enable = true;
-    };
-  };
 }

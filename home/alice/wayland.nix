@@ -154,7 +154,7 @@ in
             min-height: 0;
           }
           window#waybar {
-            background: ${colors.css colors.dark 0.5}; 
+            background: ${colors.css colors.dark 0.5};
             border-bottom: 3px solid ${colors.css colors.primary 0.5};
             color: ${colors.hex colors.light};
           }
@@ -166,7 +166,7 @@ in
             background: transparent;
             color: ${colors.hex colors.light};
             border-bottom: 3px solid transparent;
-          } 
+          }
           #workspaces button.focused {
             background: ${colors.hex colors.primary};
             border-bottom: 3px solid ${colors.hex colors.dark};
@@ -198,6 +198,7 @@ in
       slurp
       grim # wayland screenshot application that works
       imv # wayland image viewer that works
+      pdfpc # pdf presentation viewer run with -s -S
     ];
     xdg.configFile."environment.d/envvars.conf".text = ''
       MOZ_ENABLE_WAYLAND=1
@@ -205,11 +206,6 @@ in
     programs = {
       firefox = {
         enable = true;
-        extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-          browserpass
-          browserpass-otp
-          ublock-origin
-        ];
       };
       alacritty = {
         enable = true;

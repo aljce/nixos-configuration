@@ -5,25 +5,13 @@
         enable = true;
         pinentryFlavor = "gtk2";
       };
-      keybase.enable = true;
-      spotifyd = {
-        enable = true;
-        settings = {
-          global = {
-            username = "mckean.kylej@gmail.com";
-            password_cmd = "pass show spotify.com | head -n 1";
-            device_name = config.networking.hostName;
-          };
-        };
-      };
     };
     home.packages = with pkgs; [
       aspell
       aspellDicts.en
       nodejs
       tldr
-      nix-deploy
-      woeusb
+      texlive.combined.scheme-full
     ];
     programs = {
       git = {
@@ -56,7 +44,6 @@
       };
       emacs.enable = true; # TODO: Set up spacemacs with home-manager
       jq.enable = true;
-      texlive.enable = true;
       tmux.enable = true;
       zathura.enable = true;
       zsh = {

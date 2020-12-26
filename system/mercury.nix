@@ -8,13 +8,13 @@
       host all all 127.0.0.1/32 trust
       host all all ::1/128 trust
     '';
-    extraConfig = ''
-      timezone = 'UTC'
-      shared_buffers = 128MB
-      fsync = off
-      synchronous_commit = off
-      full_page_writes = off
-    '';
+    settings = {
+      timezone = "UTC";
+      shared_buffers = "128MB";
+      fsync = "off";
+      synchronous_commit = "off";
+      full_page_writes = "off";
+    };
   };
   services.openvpn.servers = {
     mercury = {
@@ -37,6 +37,11 @@
         auth-nocache
         reneg-sec 0
       '';
+    };
+    pritunl = {
+      autoStart = false;
+      updateResolvConf = true;
+      config = builtins.readFile ./pritunl.ovpn;
     };
   };
 }
