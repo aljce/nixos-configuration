@@ -44,4 +44,25 @@
       config = builtins.readFile ./pritunl.ovpn;
     };
   };
+  # imports = [ ../../mercury/nops/module/module.nix ];
+  # sops.enable = true;
+  # sops.file = ./test.yaml;
+  # sops.secrets = {
+  #   foo = {
+  #     owner = "alice";
+  #   };
+  #   aws = {
+  #     metadata = {
+  #       file = ./test.yaml;
+  #     };
+  #     dir = {
+  #       metadata = {
+  #         file = ./test.yaml;
+  #       };
+  #       foo = {};
+  #     };
+  #     access_id = {};
+  #     secret_id = {};
+  #   };
+  # };
 }

@@ -18,6 +18,9 @@
         enable = true;
         userName = "Alice McKean";
         userEmail = "mckean.kylej@gmail.com";
+        extraConfig = {
+          alias.merge = "merge --no-edit"; # no editor popup on merge
+        };
       };
       gpg.enable = true;
       htop.enable = true;
@@ -36,6 +39,10 @@
           Host *
             User mercury
             IdentityFile ~/.ssh/mercury
+          Host *.internal.mercury.com
+            StrictHostKeyChecking=no
+          Host 10.*.*.*
+            StrictHostKeyChecking=no
         '';
       };
       lsd = {
