@@ -193,7 +193,8 @@ in
       rofi
       waybar
       signal-desktop
-      spotify-tui
+      spotify
+      discord
       libnotify
       slurp
       grim # wayland screenshot application that works

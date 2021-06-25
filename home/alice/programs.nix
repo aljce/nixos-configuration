@@ -12,6 +12,9 @@
       nodejs
       tldr
       texlive.combined.scheme-full
+      gcc
+      rustc
+      cargo
     ];
     programs = {
       git = {

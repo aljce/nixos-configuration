@@ -29,4 +29,5 @@ with {
     unstable-nixpkgs.pkgs.ledger-live-desktop
     monero-gui
   ];
+  virtualisation.docker.enable = true;
 }
