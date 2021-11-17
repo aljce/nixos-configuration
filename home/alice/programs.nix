@@ -15,6 +15,8 @@
       gcc
       rustc
       cargo
+      cachix
+      direnv
     ];
     programs = {
       git = {
