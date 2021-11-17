@@ -2,11 +2,16 @@
 with {
   unstable-nixpkgs = import ./unstable-nixpkgs.nix;
 };
-{ services.postgresql = {
+{ boot.kernel.sysctl = {
+    "fs.inotify.max_user_watches"   = 1048576;   # default:  8192
+    "fs.inotify.max_user_instances" =    1024;   # default:   128
+    "fs.inotify.max_queued_events"  =   32768;   # default: 16384
+  };
+
+  services.postgresql = {
     package = unstable-nixpkgs.postgresql_13;
     enable = true;
     enableTCPIP = false;
-    extraPlugins = [config.services.postgresql.package.pkgs.postgis];
     authentication = ''
       local all all trust
       host all all 127.0.0.1/32 trust
