@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 with {
   unstable-nixpkgs = import ./unstable-nixpkgs.nix;
 };
@@ -6,6 +6,7 @@ with {
     package = unstable-nixpkgs.postgresql_13;
     enable = true;
     enableTCPIP = false;
+    extraPlugins = [config.services.postgresql.package.pkgs.postgis];
     authentication = ''
       local all all trust
       host all all 127.0.0.1/32 trust

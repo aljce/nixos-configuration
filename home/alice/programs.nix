@@ -1,4 +1,7 @@
 { config, pkgs, ... }:
+with {
+  unstableNixpkgs = import ../../system/unstable-nixpkgs.nix;
+};
 { home-manager.users.alice = {
     services = {
       gpg-agent = {
@@ -9,6 +12,17 @@
     home.packages = with pkgs; [
       aspell
       aspellDicts.en
+      (unstableNixpkgs.agda.withPackages (ps: with ps; [ standard-library cubical ]))
+      # (agda.overrideAttrs (old: {
+      #   Agda = pkgs.haskellPackages.Agda.overrideAttrs (old: {
+      #     src = pkgs.fetchFromGitHub {
+      #       owner = "agda";
+      #       repo = "agda";
+      #       rev = "2.6.2";
+      #       sha256 = "0c9ngshjdkvhyz59nhg5h5rd5mvv6dzfq1jg732bqg627jm2wwgz";
+      #     };
+      #   });
+      # }))
       nodejs
       tldr
       texlive.combined.scheme-full
