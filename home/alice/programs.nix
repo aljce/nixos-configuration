@@ -13,24 +13,14 @@ with {
       aspell
       aspellDicts.en
       (unstableNixpkgs.agda.withPackages (ps: with ps; [ standard-library cubical ]))
-      # (agda.overrideAttrs (old: {
-      #   Agda = pkgs.haskellPackages.Agda.overrideAttrs (old: {
-      #     src = pkgs.fetchFromGitHub {
-      #       owner = "agda";
-      #       repo = "agda";
-      #       rev = "2.6.2";
-      #       sha256 = "0c9ngshjdkvhyz59nhg5h5rd5mvv6dzfq1jg732bqg627jm2wwgz";
-      #     };
-      #   });
-      # }))
-      nodejs
+      nodejs-16_x
       tldr
       texlive.combined.scheme-full
       gcc
       rustc
       cargo
       cachix
-      direnv
+      google-chrome
     ];
     programs = {
       git = {
@@ -49,6 +39,11 @@ with {
           (exts: with exts; [ pass-otp pass-checkup pass-update pass-import ]);
       };
       browserpass.enable = true;
+      direnv = {
+        enable = true;
+        enableZshIntegration = true;
+        nix-direnv.enable = true;
+      };
       ssh = {
         enable = true;
         extraConfig = ''
@@ -68,7 +63,14 @@ with {
         enable = true;
         enableAliases = true;
       };
-      emacs.enable = true; # TODO: Set up spacemacs with home-manager
+      emacs = {
+        enable = true;
+        package = pkgs.emacs28Packages.emacs;
+      };
+      vscode = {
+        enable = true;
+        haskell.enable = false;
+      };
       jq.enable = true;
       tmux.enable = true;
       zathura.enable = true;

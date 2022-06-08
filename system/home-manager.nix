@@ -1,8 +1,9 @@
 { pkgs, ... }:
 let home-manager = builtins.fetchTarball {
-      url = "https://github.com/rycee/home-manager/archive/release-20.09.tar.gz";
-      sha256 = "07f903ij0czyhly8kvwjazvz3s6kflxzh5fs6j8781lkxsy47i9f";
+      url = "https://github.com/rycee/home-manager/archive/release-22.05.tar.gz";
+      sha256 = "1bn5m4qlzxc5c264hwyy9n8f7m1pzc79fd0xh18n46wn0v8vx4jn";
     };
 in
 { imports = [ "${home-manager}/nixos" ];
+  home-manager.useGlobalPkgs = true;
 }

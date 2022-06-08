@@ -180,14 +180,14 @@ in
           }
         '';
       };
-      redshift = {
-        enable = true;
-        package = pkgs.redshift-wlr;
-        provider = "geoclue2";
-      };
+      # redshift = {
+      #   enable = true;
+      #   package = pkgs.redshift-wlr;
+      #   provider = "geoclue2";
+      # };
     };
     home.packages = with pkgs; [
-      swaylock-effects
+      # swaylock-effects
       xwayland
       wl-clipboard
       rofi
@@ -232,7 +232,6 @@ in
               background = colors.hex colors.dark;
               foreground = colors.hex colors.light;
             };
-            
           };
           background_opacity = 0.8;
         };
@@ -254,7 +253,6 @@ in
   fonts.fonts = with pkgs; [
     source-code-pro
     font-awesome
-    nerdfonts
   ];
 }
 

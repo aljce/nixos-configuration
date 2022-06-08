@@ -26,15 +26,4 @@ stdenv.mkDerivation rec {
   mesonFlags = [
     "-Dpam=enabled" "-Dgdk-pixbuf=enabled" "-Dman-pages=enabled"
   ];
-
-  meta = with stdenv.lib; {
-    description = "Screen locker for Wayland";
-    longDescription = ''
-      swaylock-effects is a screen locking utility for Wayland compositors.
-    '';
-    inherit (src.meta) homepage;
-    license = licenses.mit;
-    platforms = platforms.linux;
-    maintainers = with maintainers; [ gnxlxnxx ];
-  };
 }

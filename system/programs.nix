@@ -7,7 +7,7 @@
     tree
     w3m
     parted
-    ag
+    ripgrep
     unzip
     xxd
     tcpdump
@@ -16,5 +16,6 @@
     parallel
     findutils
     xorriso
+    bind
   ];
 }

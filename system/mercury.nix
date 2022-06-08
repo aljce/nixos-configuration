@@ -9,7 +9,7 @@ with {
   };
 
   services.postgresql = {
-    package = unstable-nixpkgs.postgresql_13;
+    package = unstable-nixpkgs.postgresql_14;
     enable = true;
     enableTCPIP = false;
     authentication = ''

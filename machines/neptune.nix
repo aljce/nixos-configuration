@@ -21,6 +21,7 @@
       };
       grub = {
         enable = true;
+        configurationLimit = 8; # windows boot partition is small
         devices = [ "nodev" ];
         efiSupport = true;
         extraEntries = ''
@@ -39,7 +40,7 @@
     initrd.luks.devices.crypt-root = {
       device = "/dev/nvme0n1p1";
     };
-    kernelPackages = pkgs.linuxPackages_latest;
+    # kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackges;
   };
 
   hardware.enableRedistributableFirmware = true;
