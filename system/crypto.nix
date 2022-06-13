@@ -1,9 +1,6 @@
 { pkgs, ... }:
-with {
-  unstable-nixpkgs = import ./unstable-nixpkgs.nix;
-};
 { services.pcscd.enable = true;
-  services.udev.packages = [ pkgs.yubikey-personalization unstable-nixpkgs.ledger-udev-rules ];
+  services.udev.packages = with pkgs; [ yubikey-personalization ledger-udev-rules ];
 
   users.groups.plugdev = {};
 
@@ -24,10 +21,10 @@ with {
   ''
   ;
 
-  # hardware.ledger.enable = true;
+  hardware.ledger.enable = true;
+
   environment.systemPackages = with pkgs; [
-    unstable-nixpkgs.pkgs.ledger-live-desktop
+    ledger-live-desktop
     monero-gui
   ];
-  virtualisation.docker.enable = true;
 }

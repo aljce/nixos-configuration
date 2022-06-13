@@ -1,17 +1,13 @@
 { config, pkgs, ... }:
-{ imports =
-    [ ../system/users.nix
-      ../system/programs.nix
-      ../system/audio.nix
-      ../system/networking.nix
-      ../system/nix.nix
-      ../system/fonts.nix
-      ../system/crypto.nix
-      ../system/home-manager.nix
-      ../system/mercury.nix
-      ../home/modules
-      ../home/alice
-    ];
+{
+  imports = [
+    ./hardware-configuration.nix
+  ];
+
+  networking = {
+    hostName = "neptune";
+    hostId = "f182f5a7";
+  };
 
   boot = {
     loader = {
@@ -21,7 +17,7 @@
       };
       grub = {
         enable = true;
-        configurationLimit = 8; # windows boot partition is small
+        configurationLimit = 1; # windows boot partition is small
         devices = [ "nodev" ];
         efiSupport = true;
         extraEntries = ''
@@ -35,12 +31,12 @@
           }
         '';
       };
+      timeout = null; # wait on boot screen indefinitely
     };
     supportedFilesystems = [ "zfs" ];
     initrd.luks.devices.crypt-root = {
       device = "/dev/nvme0n1p1";
     };
-    # kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackges;
   };
 
   hardware.enableRedistributableFirmware = true;
@@ -48,9 +44,7 @@
 
   hardware.bluetooth.enable = true;
 
-  networking.hostId = "f182f5a7";
-
   time.timeZone = "America/Los_Angeles";
 
-  system.stateVersion = "20.09";
+  system.stateVersion = "22.05";
 }

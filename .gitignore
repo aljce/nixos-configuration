@@ -1,5 +1,2 @@
-hardware-configuration.nix
-hostname
-dist
 result
-*.ovpn
+*.vpn

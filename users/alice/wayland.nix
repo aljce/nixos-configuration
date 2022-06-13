@@ -3,36 +3,8 @@ with lib.cli;
 let swayfont = "source-code-pro 10";
     modifier = "Mod1";
     colors = import ./colors.nix { inherit lib; };
-    swaylock-effects = pkgs.callPackage ../packages/swaylock-effects.nix {};
-    swaylock-config = toGNUCommandLineShell {} {
-      screenshots = true;
-      clock = true;
-      indicator = true;
-      show-failed-attempts = true;
-      ignore-empty-password = true;
-      grace = 2;
-      effect-blur = "7x5";
-      effect-vignette = "0.6:0.6";
-      ring-color = colors.hex colors.accent;
-      ring-ver-color = colors.hex colors.green;
-      ring-wrong-color = colors.hex colors.red;
-      key-hl-color = colors.hex colors.primary;
-      line-color = "00000000";
-      line-ver-color = "00000000";
-      line-wrong-color = "00000000";
-      inside-color = "00000000";
-      inside-ver-color = "00000000";
-      inside-wrong-color = "00000000";
-      separator-color = "00000000";
-      text-color = colors.hex colors.light;
-    };
-    swaylock-command = "swaylock ${swaylock-config}";
-    unstable-nixpkgs = import ../../system/unstable-nixpkgs.nix;
 in
-{ programs.sway.enable = true;
-  home-manager.users.alice = {
-    imports = [ ../modules/waybar.nix ];
-    wayland.windowManager.sway = {
+{   wayland.windowManager.sway = {
       enable = true;
       config = {
         fonts = [ swayfont ];
@@ -122,70 +94,6 @@ in
         ];
       };
     };
-    services = {
-      waybar = {
-        enable = true;
-        settings = builtins.toJSON [{
-          layer = "bottom";
-          position = "top";
-          height = 40;
-          modules-left = [ "sway/workspaces" "sway/mode" ];
-          modules-center = [ "sway/window" ];
-          modules-right = [ "clock" ];
-          "sway/window" = {
-            format = "{}";
-            max-length = 50;
-          };
-          "sway/mode" = {
-            format = "{}";
-          };
-          clock = {
-            format = "{:%H:%M}";
-            tooltip-format = "{:%Y-%m-%d | %H:%M}";
-            format-alt = "{:%Y-%m-%d}";
-          };
-        }];
-        style = ''
-          * {
-            border: none;
-            border-radius: 0;
-            font-family: 'Source Code Pro', 'Font Awesome 5';
-            font-size: 20px;
-            min-height: 0;
-          }
-          window#waybar {
-            background: ${colors.css colors.dark 0.5};
-            border-bottom: 3px solid ${colors.css colors.primary 0.5};
-            color: ${colors.hex colors.light};
-          }
-          window#waybar.hidden {
-            opacity: 0.0;
-          }
-          #workspaces button {
-            padding: 0 5px;
-            background: transparent;
-            color: ${colors.hex colors.light};
-            border-bottom: 3px solid transparent;
-          }
-          #workspaces button.focused {
-            background: ${colors.hex colors.primary};
-            border-bottom: 3px solid ${colors.hex colors.dark};
-          }
-          #workspaces button.urgent {
-            background-color: ${colors.hex colors.red};
-          }
-          #clock, #cpu, #memory, #temperature, #backlight, #network, #pulseaudio, #mode, #idle_inhibitor {
-            padding: 0 10px;
-            margin: 0 5px;
-          }
-        '';
-      };
-      # redshift = {
-      #   enable = true;
-      #   package = pkgs.redshift-wlr;
-      #   provider = "geoclue2";
-      # };
-    };
     home.packages = with pkgs; [
       # swaylock-effects
       xwayland
@@ -233,7 +141,6 @@ in
               foreground = colors.hex colors.light;
             };
           };
-          background_opacity = 0.8;
         };
       };
       mako = {
@@ -248,11 +155,5 @@ in
       };
       rofi.enable = true;
     };
-  };
-  services.geoclue2.enable = true;
-  fonts.fonts = with pkgs; [
-    source-code-pro
-    font-awesome
-  ];
 }
 
