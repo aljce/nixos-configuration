@@ -4,4 +4,8 @@
     font = "Lat2-Terminus16";
     keyMap = "dvorak-programmer";
   };
+  fonts.fonts = with pkgs; [
+    source-code-pro
+    font-awesome
+  ];
 }

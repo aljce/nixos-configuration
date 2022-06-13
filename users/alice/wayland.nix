@@ -6,8 +6,13 @@ let swayfont = "source-code-pro 10";
 in
 {   wayland.windowManager.sway = {
       enable = true;
+      # systemdIntegration = 
       config = {
-        fonts = [ swayfont ];
+        fonts = {
+          names = [ swayfont ];
+          style = "Bold";
+          size = 11.0;
+        };
         gaps = {
           inner = 5;
           outer = 5;
@@ -99,6 +104,8 @@ in
     ];
     xdg.configFile."environment.d/envvars.conf".text = ''
       MOZ_ENABLE_WAYLAND=1
+      XDG_CURRENT_DESKTOP=sway
+      XDG_SESSION_TYPE=wayland
     '';
     programs = {
       firefox = {
@@ -106,30 +113,30 @@ in
       };
       alacritty = {
         enable = true;
-        settings = {
-          env.TERM = "alacritty";
-          draw_bold_text_with_bright_colors = true;
-          font = {
-            normal.family = "SourceCodePro";
-            bold.family = "SourceCodePro";
-            italic.family = "SourceCodePro";
-            size = 18.0;
-            offset = {
-              x = 0;
-              y = 0;
-            };
-            glyph_offset = {
-              x = 0;
-              y = 0;
-            };
-          };
-          colors = {
-            primary = {
-              background = colors.hex colors.dark;
-              foreground = colors.hex colors.light;
-            };
-          };
-        };
+        # settings = {
+        #   env.TERM = "alacritty";
+        #   draw_bold_text_with_bright_colors = true;
+        #   font = {
+        #     normal.family = "SourceCodePro";
+        #     bold.family = "SourceCodePro";
+        #     italic.family = "SourceCodePro";
+        #     size = 18.0;
+        #     offset = {
+        #       x = 0;
+        #       y = 0;
+        #     };
+        #     glyph_offset = {
+        #       x = 0;
+        #       y = 0;
+        #     };
+        #   };
+        #   colors = {
+        #     primary = {
+        #       background = colors.hex colors.dark;
+        #       foreground = colors.hex colors.light;
+        #     };
+        #   };
+        # };
       };
       mako = {
         enable = true;
