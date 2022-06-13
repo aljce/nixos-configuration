@@ -69,7 +69,6 @@ in
         workspaceAutoBackAndForth = true;
         modes = {
           power = {
-            "l" = "exec ${swaylock-command}, mode default";
             "e" = "exit";
             "r" = "exec systemctl reboot";
             "s" = "exec systemctl poweroff -i";
@@ -80,17 +79,6 @@ in
         };
         bars = [];
         startup = [
-          { command = "exec systemctl --user restart waybar.service";
-            always = true;
-          }
-          { command = ''
-              swayidle -w \
-                timeout 300 '${swaylock-command}' \
-                timeout 600 'swaymsg "output * dpms off"' \
-                      resume 'swaymsg "output * dpms on"' \
-            '';
-            always = false;
-          }
         ];
       };
     };
