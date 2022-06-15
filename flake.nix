@@ -15,8 +15,7 @@
       url = "github:misterio77/nix-colors";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # mercury.url = "git+ssh://git@github.com/mercurytechnologies/nixos-configuration.git?ref=main";
-    mercury.url = "/home/alice/repos/mercury/nixos-configuration";
+    mercury.url = "git+ssh://git@github.com/mercurytechnologies/nixos-configuration.git?ref=main";
   };
   outputs =
     { nixpkgs

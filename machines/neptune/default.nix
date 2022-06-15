@@ -17,7 +17,7 @@
       };
       grub = {
         enable = true;
-        configurationLimit = 1; # windows boot partition is small
+        configurationLimit = 8; # windows boot partition is small
         devices = [ "nodev" ];
         efiSupport = true;
         extraEntries = ''
