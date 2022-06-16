@@ -3,7 +3,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-22.05";
     home-manager = {
-      url = "github:nix-community/home-manager/release-22.05";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
@@ -43,7 +43,6 @@
 
             # Mercury
             mercury.nixosModules
-            # mercury.roles.aws
             ./mercury
 
             # Home Manager
@@ -60,10 +59,8 @@
         saturn = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
-            # Modules
+            # Base
             ./system
-            ./sops
-            ./mercury
 
             # Hardware
             ./machines/saturn
@@ -71,6 +68,11 @@
 
             # Secrets
             sops-nix.nixosModules.sops
+            ./sops
+
+            # Mercury
+            mercury.nixosModules
+            ./mercury
 
             # Home Manager
             home-manager.nixosModules.home-manager
@@ -78,7 +80,7 @@
                 home-manager.useGlobalPkgs = true;
                 home-manager.useUserPackages = true;
                 home-manager.users.alice = import ./users/alice {
-                  colours = nix-colors;
+                  inherit nix-colors;
                 };
               }
           ];
