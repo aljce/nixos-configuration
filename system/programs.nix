@@ -7,7 +7,6 @@
     tree
     w3m
     parted
-    ag
     unzip
     xxd
     tcpdump

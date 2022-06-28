@@ -3,7 +3,6 @@ with lib.cli;
 let swayfont = "source-code-pro 10";
     modifier = "Mod1";
     colors = import ./colors.nix { inherit lib; };
-    swaylock-effects = pkgs.callPackage ../packages/swaylock-effects.nix {};
     swaylock-config = toGNUCommandLineShell {} {
       screenshots = true;
       clock = true;
@@ -26,7 +25,6 @@ let swayfont = "source-code-pro 10";
       separator-color = "00000000";
       text-color = colors.hex colors.light;
     };
-    swaylock-command = "swaylock ${swaylock-config}";
     unstable-nixpkgs = import ../../system/unstable-nixpkgs.nix;
 in
 { programs.sway.enable = true;
@@ -97,7 +95,6 @@ in
         workspaceAutoBackAndForth = true;
         modes = {
           power = {
-            "l" = "exec ${swaylock-command}, mode default";
             "e" = "exit";
             "r" = "exec systemctl reboot";
             "s" = "exec systemctl poweroff -i";
@@ -113,7 +110,6 @@ in
           }
           { command = ''
               swayidle -w \
-                timeout 300 '${swaylock-command}' \
                 timeout 600 'swaymsg "output * dpms off"' \
                       resume 'swaymsg "output * dpms on"' \
             '';
@@ -179,11 +175,6 @@ in
             margin: 0 5px;
           }
         '';
-      };
-      redshift = {
-        enable = true;
-        package = pkgs.redshift-wlr;
-        provider = "geoclue2";
       };
     };
     home.packages = with pkgs; [
