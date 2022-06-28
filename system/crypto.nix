@@ -1,6 +1,6 @@
 { pkgs, ... }:
 with {
-  unstable-nixpkgs = import ./unstable-nixpkgs.nix;
+  unstable-nixpkgs = import ./unstable-nixpkgs.nix {};
 };
 { services.pcscd.enable = true;
   services.udev.packages = [ pkgs.yubikey-personalization unstable-nixpkgs.ledger-udev-rules ];

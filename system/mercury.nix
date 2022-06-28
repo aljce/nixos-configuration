@@ -1,6 +1,6 @@
 { pkgs, config, ... }:
 with {
-  unstable-nixpkgs = import ./unstable-nixpkgs.nix;
+  unstable-nixpkgs = import ./unstable-nixpkgs.nix {};
 };
 { boot.kernel.sysctl = {
     "fs.inotify.max_user_watches"   = 1048576;   # default:  8192
