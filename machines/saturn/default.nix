@@ -5,7 +5,7 @@
   ];
 
   networking = {
-    hostname = "neptune";
+    hostname = "saturn";
     hostId = "39bae8d0";
   };
 
