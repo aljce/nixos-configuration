@@ -24,6 +24,7 @@
       userName = "Alice McKean";
       userEmail = "mckean.kylej@gmail.com";
       extraConfig = {
+        pull.rebase = "false";
         alias.merge = "merge --no-edit"; # no editor popup on merge
       };
     };

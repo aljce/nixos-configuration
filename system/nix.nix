@@ -9,7 +9,7 @@
       "root"
     ];
     extraOptions = ''
-      experimental-features = flakes
+      experimental-features = flakes nix-command
     '';
   };
 }
