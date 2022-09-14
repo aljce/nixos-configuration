@@ -1,4 +1,10 @@
 { pkgs, ... }:
+<<<<<<< HEAD
+=======
+with {
+  unstable-nixpkgs = import ./unstable-nixpkgs.nix {};
+};
+>>>>>>> origin
 { services.pcscd.enable = true;
   services.udev.packages = with pkgs; [ yubikey-personalization ledger-udev-rules ];
 
