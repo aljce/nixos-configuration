@@ -6,9 +6,8 @@
     };
   };
   home.packages = with pkgs; [
-    aspell
-    aspellDicts.en
-    (agda.withPackages (ps: with ps; [ standard-library cubical ]))
+    (aspellWithDicts (d: [ d.en ]))
+    haskellPackages.Agda
     nodejs-16_x
     tldr
     texlive.combined.scheme-full
@@ -56,6 +55,7 @@
     emacs = {
       enable = true;
       package = pkgs.emacs28Packages.emacs;
+      extraPackages = epkgs: [ epkgs.vterm ];
     };
     jq.enable = true;
     tmux.enable = true;
@@ -68,6 +68,11 @@
         "..." = "cd ../..";
         "...." = "cd ../../..";
         "nrs" = "sudo nixos-rebuild switch";
+        "vpn" = "sudo systemctl restart openvpn-mercury";
+        "nd" = "nix develop";
+        "ns" = "nix-shell";
+        "nb" = "nix build";
+        "ag" = "rg";
       };
       oh-my-zsh = {
         enable = true;
