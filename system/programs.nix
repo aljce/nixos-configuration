@@ -7,10 +7,7 @@
     tree
     w3m
     parted
-<<<<<<< HEAD
     ripgrep
-=======
->>>>>>> origin
     unzip
     xxd
     tcpdump
