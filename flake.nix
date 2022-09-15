@@ -82,7 +82,7 @@
                 home-manager.useGlobalPkgs = true;
                 home-manager.useUserPackages = true;
                 home-manager.users.alice = import ./users/alice {
-                  inherit nix-colors;
+                  inherit nix-colors nix-doom-emacs;
                 };
               }
           ];
