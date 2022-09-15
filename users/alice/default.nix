@@ -1,6 +1,7 @@
-{ nix-colors }: { pkgs, config, ... }:
+{ nix-colors, nix-doom-emacs }: { pkgs, config, ... }:
 { imports = [
     nix-colors.homeManagerModule
+    nix-doom-emacs.hmModule
     ./programs.nix
     ./wayland.nix
   ];

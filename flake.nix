@@ -15,6 +15,7 @@
       url = "github:misterio77/nix-colors";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-doom-emacs.url = "github:nix-community/nix-doom-emacs";
     mercury.url = "git+ssh://git@github.com/mercurytechnologies/nixos-configuration.git?ref=main";
   };
   outputs =
@@ -23,6 +24,7 @@
     , nixos-hardware
     , sops-nix
     , nix-colors
+    , nix-doom-emacs
     , mercury
     , ...
     }: {
@@ -51,7 +53,7 @@
                 home-manager.useGlobalPkgs = true;
                 home-manager.useUserPackages = true;
                 home-manager.users.alice = import ./users/alice {
-                  inherit nix-colors;
+                  inherit nix-colors nix-doom-emacs;
                 };
               }
           ];

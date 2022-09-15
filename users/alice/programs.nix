@@ -53,11 +53,15 @@
       enable = true;
       enableAliases = true;
     };
-    emacs = {
+    doom-emacs = {
       enable = true;
-      package = pkgs.emacs28Packages.emacs;
-      extraPackages = epkgs: [ epkgs.vterm ];
+      doomPrivateDir = ./doom;
     };
+    # emacs = {
+    #   enable = true;
+    #   package = pkgs.emacs28Packages.emacs;
+    #   extraPackages = epkgs: [ epkgs.vterm ];
+    # };
     jq.enable = true;
     tmux.enable = true;
     zathura.enable = true;

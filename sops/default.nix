@@ -1,7 +1,6 @@
 { ... }:
 {
   sops = {
-    gnupg.home = "/home/alice/.gnupg";
     defaultSopsFile = ./secrets.yaml;
     secrets = {
       rootPassword = {

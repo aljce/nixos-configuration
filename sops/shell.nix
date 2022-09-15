@@ -9,6 +9,8 @@ let
 in
 mkShell {
   nativeBuildInputs = with sops-nix; [
+    age
+    ssh-to-age
     sops-pgp-hook
   ];
 }
