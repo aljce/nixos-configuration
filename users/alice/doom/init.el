@@ -69,5 +69,4 @@
        yaml              ; JSON, but readable
 
        :config
-       (default +bindings +smartparens)
-       )
+       (default +bindings +smartparens))

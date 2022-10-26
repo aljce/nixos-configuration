@@ -4,4 +4,4 @@
 ;; sync' after modifying this file!
 
 ;;; code;
-(setq doom-font (font-spec :family "Source Code Pro" :size 24))
+(setq doom-font (font-spec :family "Source Code Pro" :size 28))
