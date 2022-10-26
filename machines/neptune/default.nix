@@ -42,6 +42,8 @@
   hardware.enableRedistributableFirmware = true;
   services.xserver.videoDrivers = [ "amdgpu" ];
 
+  time.hardwareClockInLocalTime = true;
+
   hardware.bluetooth.enable = true;
 
   time.timeZone = "America/Los_Angeles";
