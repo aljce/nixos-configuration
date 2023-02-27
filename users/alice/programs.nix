@@ -74,6 +74,8 @@
         "...." = "cd ../../..";
         "nrs" = "sudo nixos-rebuild switch";
         "vpn" = "sudo systemctl restart openvpn-mercury";
+        "mwb" = "cd ~/repos/mercury/mercury-web-backend";
+        "infra" = "cd ~/repos/mercury/infrastructure";
         "nd" = "nix develop";
         "ns" = "nix-shell";
         "nb" = "nix build";

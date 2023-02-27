@@ -56,7 +56,7 @@
        :lang
        agda              ; types of types of types of types...
        emacs-lisp        ; drown in parentheses
-       (haskell +lsp)    ; a language that's lazier than I am
+       haskell    ; a language that's lazier than I am
        json              ; At least it ain't XML
        javascript        ; all(hope(abandon(ye(who(enter(here))))))
        latex             ; writing papers in Emacs has never been so fun

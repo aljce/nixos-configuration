@@ -9,7 +9,7 @@
     internalCertificateAuthority.enable = true;
     mwbDevelopment = {
       enable = true;
-      postgresPackage = pkgs.postgresql_14;
+      postgresPackage = pkgs.postgresql_13;
     };
     nixCache.enable = true;
     vpn = {

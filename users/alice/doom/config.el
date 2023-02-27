@@ -5,3 +5,4 @@
 
 ;;; code;
 (setq doom-font (font-spec :family "Source Code Pro" :size 28))
+(setq lsp-enable-file-watchers nil)
