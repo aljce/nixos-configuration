@@ -1,7 +1,7 @@
 { ... }:
 { services.xserver = {
     enable = true;
-    # autorun = false;
+    autorun = false;
     desktopManager.plasma5 = {
       enable = true;
     };

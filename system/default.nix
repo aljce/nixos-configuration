@@ -8,6 +8,5 @@
     ./nix.nix
     ./programs.nix
     ./users.nix
-    ./screen-sharing.nix
   ];
 }

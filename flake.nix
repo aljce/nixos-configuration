@@ -107,7 +107,7 @@
             # ./mercury
 
 	    # Graphics
-            ./system/xserver.nix
+            # ./system/xserver.nix
 
             # Home Manager
             home-manager.nixosModules.home-manager

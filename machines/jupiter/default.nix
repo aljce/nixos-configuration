@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 {
   imports = [
     ./hardware-configuration.nix
@@ -17,7 +17,7 @@
       };
       grub = {
         enable = true;
-        configurationLimit = 8; # windows boot partition is small
+        configurationLimit = 16; # windows boot partition is small
         devices = [ "nodev" ];
         efiSupport = true;
         extraEntries = ''
@@ -39,13 +39,21 @@
     };
   };
 
+  # boot.initrd.kernelModules = [ "nvidia" ];
+  # boot.extraModulePackages = [config.boot.kernelPackages.nvidia_x11];
+  boot.kernelPackages = pkgs.linuxPackages_latest;
   hardware.enableRedistributableFirmware = true;
-  hardware.nvidia.modesetting.enable = true;
-  hardware.bumblebee.enable = true;
-  # hardware.nvidia.prime.offload.enable = true;
-  # hardware.nvidia.prime.nvidiaBusId = "PCI:1:0:0";
-  # hardware.nvidia.prime.intelBusId = "PCI:0:2:0";
-  services.xserver.videoDrivers = [ "nvidia" ];
+  hardware.nvidia.modesetting.enable = lib.mkDefault true;
+  hardware.nvidia.powerManagement.enable = lib.mkDefault true;
+  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.beta;
+  hardware.nvidia.prime.sync.enable = true;
+  hardware.nvidia.prime.intelBusId = "PCI@00:02:0"; # "PCI:0:2:0";
+  hardware.nvidia.prime.nvidiaBusId = "PCI@01:00:0"; # "PCI:1:0:0";
+  # hardware.opengl.driSupport = true;
+  # hardware.opengl.driSupport32Bit = true;
+  hardware.nvidia.nvidiaPersistenced = true;
+  services.xserver.videoDrivers = [ "nvidia" "intel" ];
+  # services.xserver.videoDrivers = [ "intel" ];
 
   time.hardwareClockInLocalTime = true;
 

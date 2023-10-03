@@ -3,7 +3,7 @@
     nix-colors.homeManagerModule
     nix-doom-emacs.hmModule
     ./programs.nix
-    # ./wayland.nix
+    ./wayland.nix
   ];
   colorScheme = nix-colors.colorSchemes.stella;
   home.stateVersion = "22.11";
