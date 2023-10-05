@@ -4,7 +4,7 @@
     allowUnsupportedSystem = false;
   };
   nix = {
-    trustedUsers = [
+    settings.trusted-users = [
       "alice"
       "root"
     ];

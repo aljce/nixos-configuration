@@ -22,6 +22,8 @@
     # };
   };
 
+  networking.firewall.checkReversePath = "loose";
+
   environment.systemPackages = with pkgs; [
     teleport
   ];

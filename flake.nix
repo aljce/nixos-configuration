@@ -85,6 +85,36 @@
               }
           ];
         };
+        jupiter = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            # Base
+            ./system
+            ./system/sway.nix
+
+            # Hardware
+            machines/jupiter
+
+            # Secrets
+            sops-nix.nixosModules.sops
+            ./sops
+
+            # Mercury
+            mercury.nixosModules
+            ./mercury
+
+            # Home Manager
+            home-manager.nixosModules.home-manager
+              {
+                home-manager.useGlobalPkgs = true;
+                home-manager.useUserPackages = true;
+                home-manager.users.alice = import ./users/alice {
+                  inherit nix-colors nix-doom-emacs;
+                };
+              }
+          ];
+        };
+
       };
     };
 }
