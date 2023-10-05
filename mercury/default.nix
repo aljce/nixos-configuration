@@ -5,6 +5,8 @@
     "fs.inotify.max_queued_events"  =   32768;   # default: 16384
   };
 
+  services.tailscale.enable = true;
+
   mercury = {
     internalCertificateAuthority.enable = true;
     mwbDevelopment = {
@@ -12,10 +14,6 @@
       postgresPackage = pkgs.postgresql_13;
     };
     nixCache.enable = true;
-    vpn = {
-      enable = true;
-      configurationPath = config.sops.secrets.alicePritunlConfig.path;
-    };
     # legacyVpn = {
     #   enable = true;
     #   ca = config.sops.secrets.aliceOpenvpnCA.path;
@@ -23,4 +21,8 @@
     #   key = config.sops.secrets.aliceOpenvpnKey.path;
     # };
   };
+
+  environment.systemPackages = with pkgs; [
+    teleport
+  ];
 }

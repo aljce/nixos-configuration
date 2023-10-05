@@ -11,11 +11,8 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nix-colors = {
-      url = "github:misterio77/nix-colors";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    nix-doom-emacs.url = "github:nix-community/nix-doom-emacs";
+    nix-colors.url = "github:misterio77/nix-colors";
+    nix-doom-emacs.url = "git+https://github.com/nix-community/nix-doom-emacs?rev=84c57d24addd13c6712006d4bcc1a257256984a5";
     mercury.url = "git+ssh://git@github.com/mercurytechnologies/nixos-configuration.git?ref=main";
   };
   outputs =
@@ -34,6 +31,7 @@
           modules = [
             # Base
             ./system
+            ./system/steam.nix
 
             # Hardware
             ./machines/neptune

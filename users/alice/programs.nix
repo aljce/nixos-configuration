@@ -16,6 +16,8 @@
     cargo
     cachix
     google-chrome
+    vscode
+    stoken
   ];
   programs = {
     git = {
@@ -25,6 +27,7 @@
       extraConfig = {
         pull.rebase = "false";
         alias.merge = "merge --no-edit"; # no editor popup on merge
+        push.autoSetupRemote = "true";
       };
     };
     gpg.enable = true;
@@ -73,7 +76,7 @@
         "..." = "cd ../..";
         "...." = "cd ../../..";
         "nrs" = "sudo nixos-rebuild switch";
-        "vpn" = "sudo systemctl restart openvpn-mercury";
+        "vpn" = "sudo tailscale up --accept-routes";
         "mwb" = "cd ~/repos/mercury/mercury-web-backend";
         "infra" = "cd ~/repos/mercury/infrastructure";
         "nd" = "nix develop";
