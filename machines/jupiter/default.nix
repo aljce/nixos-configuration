@@ -17,7 +17,7 @@
       };
       grub = {
         enable = true;
-        configurationLimit = 16; # windows boot partition is small
+        configurationLimit = 8; # windows boot partition is small
         devices = [ "nodev" ];
         efiSupport = true;
         extraEntries = ''
@@ -41,7 +41,7 @@
 
   # boot.initrd.kernelModules = [ "nvidia" ];
   # boot.extraModulePackages = [config.boot.kernelPackages.nvidia_x11];
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_6_1;
   hardware.enableRedistributableFirmware = true;
   hardware.nvidia.modesetting.enable = lib.mkDefault true;
   hardware.nvidia.powerManagement.enable = lib.mkDefault true;

@@ -92,6 +92,7 @@
           modules = [
             # Base
             ./system
+            ./system/sway.nix
 
             # Hardware
             machines/jupiter
@@ -103,8 +104,8 @@
             ./sops
 
             # Mercury
-            # mercury.nixosModules
-            # ./mercury
+            mercury.nixosModules
+            ./mercury
 
 	    # Graphics
             # ./system/xserver.nix
