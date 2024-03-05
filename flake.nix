@@ -1,9 +1,9 @@
 {
   description = "Alice McKean's NixOS configuration";
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-22.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
     home-manager = {
-      url = "github:nix-community/home-manager/release-22.11";
+      url = "github:nix-community/home-manager/release-23.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
@@ -12,7 +12,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-colors.url = "github:misterio77/nix-colors";
-    nix-doom-emacs.url = "git+https://github.com/nix-community/nix-doom-emacs?rev=84c57d24addd13c6712006d4bcc1a257256984a5";
     mercury.url = "git+ssh://git@github.com/mercurytechnologies/nixos-configuration.git?ref=main";
   };
   outputs =
@@ -21,7 +20,6 @@
     , nixos-hardware
     , sops-nix
     , nix-colors
-    , nix-doom-emacs
     , mercury
     , ...
     }: {
@@ -51,7 +49,7 @@
                 home-manager.useGlobalPkgs = true;
                 home-manager.useUserPackages = true;
                 home-manager.users.alice = import ./users/alice {
-                  inherit nix-colors nix-doom-emacs;
+                  inherit nix-colors;
                 };
               }
           ];
@@ -80,7 +78,7 @@
                 home-manager.useGlobalPkgs = true;
                 home-manager.useUserPackages = true;
                 home-manager.users.alice = import ./users/alice {
-                  inherit nix-colors nix-doom-emacs;
+                  inherit nix-colors;
                 };
               }
           ];
@@ -109,7 +107,7 @@
                 home-manager.useGlobalPkgs = true;
                 home-manager.useUserPackages = true;
                 home-manager.users.alice = import ./users/alice {
-                  inherit nix-colors nix-doom-emacs;
+                  inherit nix-colors;
                 };
               }
           ];

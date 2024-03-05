@@ -1,5 +1,10 @@
 { pkgs, ... }:
-{ environment.systemPackages = with pkgs; [
+{ programs = {
+      zsh = {
+          enable = true;
+      };
+  };
+  environment.systemPackages = with pkgs; [
     # Basic Command line interfaces
     which
     wget

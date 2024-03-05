@@ -108,6 +108,7 @@ in
     MOZ_USE_XINPUT2=1
     XDG_CURRENT_DESKTOP=sway
     XDG_SESSION_TYPE=wayland
+    NIXOS_OZONE_WL=1
   '';
   programs = {
     waybar = {
