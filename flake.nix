@@ -11,6 +11,10 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    kolide = {
+      url = "github:kolide/nix-agent/main";
+      inputs.nixpkgs.follows = "nixpkgs"; 
+    };
     nix-colors.url = "github:misterio77/nix-colors";
     mercury.url = "git+ssh://git@github.com/mercurytechnologies/nixos-configuration.git?ref=main";
   };
@@ -21,6 +25,7 @@
     , sops-nix
     , nix-colors
     , mercury
+    , kolide
     , ...
     }: {
       nixosConfigurations = {
@@ -86,12 +91,15 @@
         jupiter = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
-            # Base
-            ./system
-            ./system/sway.nix
-
             # Hardware
             machines/jupiter
+            ./system
+            ./system/sway.nix
+            ./system/fingerprint.nix
+            
+            # Kolide
+            ./system/kolide.nix
+            kolide.nixosModules.kolide-launcher
 
             # Secrets
             sops-nix.nixosModules.sops

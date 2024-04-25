@@ -37,6 +37,27 @@
         "type": "github"
       }
     },
+    "kolide": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1710943656,
+        "narHash": "sha256-NeQnFlvMtXWpAAyi03G6RSsVd41LBuRnwjRPjrUroeY=",
+        "owner": "kolide",
+        "repo": "nix-agent",
+        "rev": "90b7761a40a54dd94ca631b8a5f632e304e07d44",
+        "type": "github"
+      },
+      "original": {
+        "owner": "kolide",
+        "ref": "main",
+        "repo": "nix-agent",
+        "type": "github"
+      }
+    },
     "mercury": {
       "locked": {
         "lastModified": 1703267539,
@@ -138,6 +159,7 @@
     "root": {
       "inputs": {
         "home-manager": "home-manager",
+        "kolide": "kolide",
         "mercury": "mercury",
         "nix-colors": "nix-colors",
         "nixos-hardware": "nixos-hardware",

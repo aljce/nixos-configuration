@@ -18,6 +18,8 @@
     google-chrome
     vscode
     stoken
+    vlc
+    lsof
   ];
   programs = {
     git = {
@@ -58,6 +60,7 @@
     };
     jq.enable = true;
     tmux.enable = true;
+    obs-studio.enable = true;
     vscode = {
       enable = true;
       enableExtensionUpdateCheck = false;
