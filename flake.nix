@@ -96,6 +96,7 @@
             ./system
             ./system/sway.nix
             ./system/fingerprint.nix
+            ./system/flipperzero.nix
             
             # Kolide
             ./system/kolide.nix

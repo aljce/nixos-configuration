@@ -20,6 +20,8 @@
     stoken
     vlc
     lsof
+    qFlipper
+    light
   ];
   programs = {
     git = {
