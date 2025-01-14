@@ -121,7 +121,37 @@
               }
           ];
         };
+        venus = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            # Hardware
+            machines/venus
+            ./system
+            ./system/sway.nix
+            
+            # Kolide
+            ./system/kolide.nix
+            kolide.nixosModules.kolide-launcher
 
+            # Secrets
+            sops-nix.nixosModules.sops
+            ./sops
+
+            # Mercury
+            mercury.nixosModules
+            ./mercury
+
+            # Home Manager
+            home-manager.nixosModules.home-manager
+              {
+                home-manager.useGlobalPkgs = true;
+                home-manager.useUserPackages = true;
+                home-manager.users.alice = import ./users/alice {
+                  inherit nix-colors;
+                };
+              }
+          ];
+        };
       };
     };
 }
