@@ -11,7 +11,7 @@
     internalCertificateAuthority.enable = true;
     mwbDevelopment = {
       enable = true;
-      postgresPackage = pkgs.postgresql_13;
+      postgresPackage = pkgs.postgresql_16;
     };
     nixCache.enable = true;
     # legacyVpn = {
