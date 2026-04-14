@@ -7,7 +7,7 @@ in
 {
   wayland.windowManager.sway = {
     enable = true;
-    systemdIntegration = true;
+    systemd.enable = true;
     config = {
       fonts = {
         names = [ swayfont ];
@@ -179,7 +179,6 @@ in
       enable = true;
       settings = {
         env.TERM = "alacritty";
-        draw_bold_text_with_bright_colors = true;
         font = {
           normal.family = "SourceCodePro";
           bold.family = "SourceCodePro";
@@ -202,16 +201,6 @@ in
         };
         window.opacity = 0.8;
       };
-    };
-    mako = {
-      enable = true;
-      anchor = "top-right";
-      backgroundColor = colors.hex colors.dark;
-      textColor = colors.hex colors.light;
-      borderColor = colors.hex colors.primary;
-      borderRadius = 5;
-      borderSize = 2;
-      font = "SourceCodePro 18";
     };
     rofi.enable = true;
     swaylock.settings = {
@@ -237,17 +226,31 @@ in
       text-color = colors.hex colors.light;
     };
   };
-  services.swayidle = {
-    enable = true;
-    timeouts = [
-      { timeout = 300;
-        command = "${pkgs.swaylock}/bin/swaylock -f";
-      }
-      { timeout = 600;
-        command = "${pkgs.sway}/bin/swaymsg 'output * dpms off'";
-        resumeCommand = "${pkgs.sway}/bin/swaymsg 'output * dpms on'";
-      }
-    ];
+  services = {
+    mako = {
+      enable = true;
+      settings = {
+        anchor = "top-right";
+        background-color = colors.hex colors.dark;
+        text-color = colors.hex colors.light;
+        border-color = colors.hex colors.primary;
+        border-radius = 5;
+        border-size = 2;
+        font = "SourceCodePro 18";
+      };
+    };
+    swayidle = {
+      enable = true;
+      timeouts = [
+        { timeout = 300;
+          command = "${pkgs.swaylock}/bin/swaylock -f";
+        }
+        { timeout = 600;
+          command = "${pkgs.sway}/bin/swaymsg 'output * dpms off'";
+          resumeCommand = "${pkgs.sway}/bin/swaymsg 'output * dpms on'";
+        }
+      ];
+    };
   };
 }
 

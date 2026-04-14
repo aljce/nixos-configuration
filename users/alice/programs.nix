@@ -1,11 +1,5 @@
 { config, pkgs, ... }:
-{ services = {
-    gpg-agent = {
-      enable = true;
-      pinentryFlavor = "gtk2";
-    };
-  };
-  home.packages = with pkgs; [
+{ home.packages = with pkgs; [
     (aspellWithDicts (d: [ d.en ]))
     haskellPackages.Agda
     nodejs
@@ -22,13 +16,15 @@
     lsof
     qFlipper
     light
+    zoom-us
+    code-cursor
   ];
   programs = {
     git = {
       enable = true;
-      userName = "Alice McKean";
-      userEmail = "mckean.kylej@gmail.com";
-      extraConfig = {
+      settings = {
+        user.name = "Alice McKean";
+        user.email = "mckean.kylej@gmail.com";
         pull.rebase = "false";
         alias.merge = "merge --no-edit"; # no editor popup on merge
         push.autoSetupRemote = "true";
@@ -43,45 +39,51 @@
     };
     ssh = {
       enable = true;
-      extraConfig = ''
-        Host *
-          User alice
-          IdentityFile ~/.ssh/id_rsa
-        Host *
-          User mercury
-          IdentityFile ~/.ssh/mercury
-        Host *.internal.mercury.com
-          StrictHostKeyChecking=no
-        Host 10.*.*.*
-          StrictHostKeyChecking=no
-      '';
+      enableDefaultConfig = false;
+      matchBlocks = {
+        "*" = {
+          identityFile = [ "~/.ssh/id_rsa" "~/.ssh/mercury" ];
+        };
+        "*.internal.mercury.com" = {
+          extraOptions = {
+            StrictHostKeyChecking = "no";
+          };
+        };
+        "10.*.*.*" = {
+          extraOptions = {
+            StrictHostKeyChecking = "no";
+          };
+        };
+      };
     };
     lsd = {
       enable = true;
-      enableAliases = true;
+      enableZshIntegration = true;
     };
     jq.enable = true;
     tmux.enable = true;
     obs-studio.enable = true;
     vscode = {
       enable = true;
-      enableExtensionUpdateCheck = false;
-      enableUpdateCheck = false;
-      extensions = with pkgs.vscode-extensions; with pkgs.vscode-utils; [
-        vscodevim.vim
-        github.copilot-chat
-        github.copilot
-        mkhl.direnv
-        dbaeumer.vscode-eslint   
-        esbenp.prettier-vscode   
-        jnoortheen.nix-ide 
-      ]; 
-      userSettings = builtins.fromJSON (builtins.readFile ./vscode-settings.json);
+      profiles.default = {
+        enableExtensionUpdateCheck = false;
+        enableUpdateCheck = false;
+        extensions = with pkgs.vscode-extensions; with pkgs.vscode-utils; [
+          vscodevim.vim
+          github.copilot-chat
+          github.copilot
+          mkhl.direnv
+          dbaeumer.vscode-eslint
+          esbenp.prettier-vscode
+          jnoortheen.nix-ide
+        ];
+        userSettings = builtins.fromJSON (builtins.readFile ./vscode-settings.json);
+      };
     };
     zathura.enable = true;
     zsh = {
       enable = true;
-      dotDir = ".config/zsh";
+      dotDir = "${config.xdg.configHome}/zsh";
       shellAliases = {
         ".." = "cd ..";
         "..." = "cd ../..";

@@ -26,5 +26,6 @@
   environment.systemPackages = with pkgs; [
     ledger-live-desktop
     monero-gui
+    electrum
   ];
 }
