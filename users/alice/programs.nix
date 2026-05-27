@@ -10,14 +10,12 @@
     cargo
     cachix
     google-chrome
-    vscode
     stoken
     vlc
     lsof
     qFlipper
     light
     zoom-us
-    code-cursor
   ];
   programs = {
     git = {
@@ -68,15 +66,15 @@
       profiles.default = {
         enableExtensionUpdateCheck = false;
         enableUpdateCheck = false;
-        extensions = with pkgs.vscode-extensions; with pkgs.vscode-utils; [
-          vscodevim.vim
-          github.copilot-chat
-          github.copilot
-          mkhl.direnv
-          dbaeumer.vscode-eslint
-          esbenp.prettier-vscode
-          jnoortheen.nix-ide
-        ];
+        # extensions = with pkgs.vscode-extensions; with pkgs.vscode-utils; [
+        #   vscodevim.vim
+        #   github.copilot-chat
+        #   github.copilot
+        #   mkhl.direnv
+        #   dbaeumer.vscode-eslint
+        #   esbenp.prettier-vscode
+        #   jnoortheen.nix-ide
+        # ];
         userSettings = builtins.fromJSON (builtins.readFile ./vscode-settings.json);
       };
     };
